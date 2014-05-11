@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.json.simple.JSONObject;
 
+import android.graphics.Bitmap;
+
 import com.google.code.linkedinapi.schema.DateOfBirth;
 import com.google.code.linkedinapi.schema.Education;
 import com.google.code.linkedinapi.schema.Educations;
@@ -35,7 +37,19 @@ public class UserInfo {
 	private String audioUrl;
 	private String styleUrl;
 	
+	private Bitmap thumbNail;
 	
+	
+
+	public Bitmap getThumbNail() {
+		return thumbNail;
+	}
+
+
+	public void setThumbNail(Bitmap thumbNail) {
+		this.thumbNail = thumbNail;
+	}
+
 
 	public UserInfo(JSONObject jsonObject){
 		 firstName = (String)jsonObject.get("first_name");
@@ -60,6 +74,54 @@ public class UserInfo {
 		 styleUrl = (String)jsonObject.get("style_id");
 		 id = (String)jsonObject.get("u_id");
 	}
+
+	
+	@SuppressWarnings("unchecked")
+	public JSONObject convertToJson(){
+		JSONObject object = new JSONObject();
+		object.put("u_id", id);
+		object.put("first_name", firstName);
+		object.put("last_name", lastName);
+		object.put("headline", headline);
+		StringBuffer educationBuffer = new StringBuffer();
+		for (int i = 0; i < educationList.length; i++) {
+			educationBuffer.append( educationList[i]+":" );
+		   //result.append( optional separator );
+		}
+		String educationString = educationBuffer.substring(0, educationBuffer.length()-1);
+		object.put("educations",educationString);
+		
+
+		StringBuffer phoneBuffer = new StringBuffer();
+		for (int i = 0; i < phoneList.length; i++) {
+			phoneBuffer.append( phoneList[i]+":" );
+		   //result.append( optional separator );
+		}
+		String phoneString = phoneBuffer.substring(0, phoneBuffer.length()-1);
+		object.put("phone_numbers",phoneString);
+		
+		object.put("industry", industry);
+		object.put("honors", null);
+		object.put("summary", summary);
+		object.put("date_of_birth", dateOfBirth);
+		object.put("current_status",currentStatus);
+
+		StringBuffer languageBuffer = new StringBuffer();
+		for (int i = 0; i < languageList.length; i++) {
+			languageBuffer.append( languageList[i]+":" );
+		   //result.append( optional separator );
+		}
+		String languageString = languageBuffer.substring(0, languageBuffer.length()-1);
+		object.put("languages",languageString);
+		
+		object.put("main_address", mainAddress);
+		object.put("picture_url", picUrl);
+		object.put("video_url", videoUrl);
+		object.put("audio_url", audioUrl);
+		object.put("style_id", styleUrl);
+		
+		return object;
+	}
 	
 	public UserInfo(Person profile){
 		
@@ -70,18 +132,20 @@ public class UserInfo {
 		Educations educations = profile.getEducations();
 		List<Education> educationss = educations.getEducationList();
 		ArrayList<String> schoolList = new ArrayList<String>();
+		educationList = new String[educationss.size()];
 		for(Education e: educationss){
 			schoolList.add(e.getSchoolName());
 		}
-		educationList = (String [])schoolList.toArray();
+		educationList = schoolList.toArray(educationList);
 		
 		PhoneNumbers pns = profile.getPhoneNumbers();
 		List<PhoneNumber> pnList = pns.getPhoneNumberList();
 		ArrayList<String> phoneNumberList = new ArrayList<String>();
+		phoneList = new String[phoneNumberList.size()];
 		for(PhoneNumber pn: pnList){
 			phoneNumberList.add(pn.getPhoneNumber());
 		}
-		phoneList = (String[]) phoneNumberList.toArray();
+		phoneList = phoneNumberList.toArray(phoneList);
 		
 		industry = profile.getIndustry();
 		
@@ -89,21 +153,23 @@ public class UserInfo {
 		
 		summary = profile.getSummary();
 		DateOfBirth dob = profile.getDateOfBirth();
-		long day = dob.getDay();
-		long month = dob.getMonth();
-		long year = dob.getYear();
-		dateOfBirth = ""+year+"-"+month+"-"+day;
-		
+		if(dob!=null){
+			long day = dob.getDay();
+			long month = dob.getMonth();
+			long year = dob.getYear();
+			dateOfBirth = "" + year + "-" + month + "-" + day;
+		}
 		currentStatus = profile.getCurrentStatus();
 		Languages languages = profile.getLanguages();
 		List<Language> languagess = languages.getLanguageList();
 		ArrayList<String> ll = new ArrayList<String>();
+		languageList = new String[ll.size()];
 		for( Language l : languagess){
 			ll.add(l.getLanguage().getName());
 		}
-		languageList = (String[]) ll.toArray();
+		languageList = ll.toArray(languageList);
 		mainAddress = profile.getMainAddress();
-		picUrl = profile.getMainAddress();
+		picUrl = profile.getPictureUrl();
 		videoUrl = null;
 		audioUrl = null;
 		styleUrl = null;

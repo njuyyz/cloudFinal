@@ -1,5 +1,6 @@
 package helper;
 
+import model.Constant;
 import model.UserInfo;
 
 import org.json.simple.JSONObject;
@@ -29,7 +30,7 @@ public class LoginHelper {
 		Thread s = new Thread(){
 			public void run(){
 				GetRequest gr = new GetRequest(
-						"http://192.168.47.19:8080/users/getGoodsList");
+						Constant.GET_USER_INFO+id);
 				JSONObject jsonObject = (JSONObject) JSONValue.parse(gr.getContent());
 				try {
 						String id = (String)jsonObject.get("u_id");

@@ -8,17 +8,13 @@ import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.CookieStore;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.cookie.Cookie;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BasicNameValuePair;
-import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
-import org.json.JSONObject;
+import org.json.simple.JSONObject;
 
-import android.content.Entity;
 import android.util.Log;
 
 public class PostRequest extends Request {
@@ -31,7 +27,7 @@ public class PostRequest extends Request {
 		StringEntity entity;
 		try {
 			entity = new StringEntity(param.toString());
-			sessionid = LoginUtil.getSession().get("s_sessionid");
+//			sessionid = LoginUtil.getSession().get("s_sessionid");
 			requestBase = new HttpPost(HTTP_URL);
 			((HttpPost) requestBase).setEntity(entity);
 		} catch (UnsupportedEncodingException e) {
@@ -42,7 +38,7 @@ public class PostRequest extends Request {
 	public boolean post() {
 		try {
 			DefaultHttpClient mHttpClient = new DefaultHttpClient();
-			requestBase.setHeader("Cookie","sessionid="+sessionid);
+//			requestBase.setHeader("Cookie","sessionid="+sessionid);
 			HttpResponse response = mHttpClient.execute(requestBase);
 			int res = response.getStatusLine().getStatusCode();
 			if (res == 200) {

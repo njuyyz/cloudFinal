@@ -39,38 +39,52 @@ public final class R {
     }
     public static final class drawable {
         public static final int counter_bg=0x7f020000;
-        public static final int ic_communities=0x7f020001;
-        public static final int ic_drawer=0x7f020002;
-        public static final int ic_home=0x7f020003;
-        public static final int ic_launcher=0x7f020004;
-        public static final int ic_pages=0x7f020005;
-        public static final int ic_people=0x7f020006;
-        public static final int ic_photos=0x7f020007;
-        public static final int ic_whats_hot=0x7f020008;
-        public static final int list_item_bg_normal=0x7f020009;
-        public static final int list_item_bg_pressed=0x7f02000a;
-        public static final int list_selector=0x7f02000b;
-        public static final int logo=0x7f02000c;
-        public static final int picture_frame=0x7f02000d;
-        public static final int picture_frame_default=0x7f02000e;
-        public static final int picture_frame_pressed=0x7f02000f;
-        public static final int picture_frame_selected=0x7f020010;
+        public static final int ic_action_new=0x7f020001;
+        public static final int ic_communities=0x7f020002;
+        public static final int ic_drawer=0x7f020003;
+        public static final int ic_home=0x7f020004;
+        public static final int ic_launcher=0x7f020005;
+        public static final int ic_pages=0x7f020006;
+        public static final int ic_people=0x7f020007;
+        public static final int ic_photos=0x7f020008;
+        public static final int ic_whats_hot=0x7f020009;
+        public static final int list_item_bg_normal=0x7f02000a;
+        public static final int list_item_bg_pressed=0x7f02000b;
+        public static final int list_selector=0x7f02000c;
+        public static final int logo=0x7f02000d;
+        public static final int picture_frame=0x7f02000e;
+        public static final int picture_frame_default=0x7f02000f;
+        public static final int picture_frame_pressed=0x7f020010;
+        public static final int picture_frame_selected=0x7f020011;
     }
     public static final class id {
-        public static final int action_settings=0x7f0a000d;
+        public static final int EducationTitle=0x7f0a0012;
+        public static final int Educations=0x7f0a0011;
+        public static final int action_settings=0x7f0a001a;
+        public static final int basic_name=0x7f0a000b;
         public static final int counter=0x7f0a0006;
         public static final int drawer_layout=0x7f0a0000;
+        public static final int email=0x7f0a000d;
+        public static final int extend_namecard=0x7f0a000e;
         public static final int frame_container=0x7f0a0001;
         public static final int icon=0x7f0a0004;
         public static final int imageView1=0x7f0a0009;
         public static final int linkedin_webview=0x7f0a0003;
         public static final int list_slidermenu=0x7f0a0002;
         public static final int login_bt=0x7f0a0008;
-        public static final int name=0x7f0a000b;
-        public static final int nameLayout=0x7f0a000a;
+        public static final int nameLayout=0x7f0a0013;
+        public static final int namecard_top=0x7f0a0014;
+        public static final int phone=0x7f0a000c;
+        public static final int record=0x7f0a0018;
+        public static final int record_button_layout=0x7f0a0016;
+        public static final int record_notice=0x7f0a0017;
+        public static final int summary=0x7f0a000f;
+        public static final int summary_title=0x7f0a0010;
+        public static final int thumbnail=0x7f0a000a;
         public static final int title=0x7f0a0005;
         public static final int txtLabel=0x7f0a0007;
-        public static final int video=0x7f0a000c;
+        public static final int video=0x7f0a0019;
+        public static final int videoLayout=0x7f0a0015;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
@@ -85,7 +99,11 @@ public final class R {
         public static final int fragment_photos=0x7f030009;
         public static final int fragment_whats_hot=0x7f03000a;
         public static final int login=0x7f03000b;
-        public static final int profile=0x7f03000c;
+        public static final int namecard_basic=0x7f03000c;
+        public static final int namecard_detail=0x7f03000d;
+        public static final int profile=0x7f03000e;
+        public static final int record_button=0x7f03000f;
+        public static final int video=0x7f030010;
     }
     public static final class menu {
         public static final int main=0x7f090000;

@@ -15,7 +15,7 @@ public class Request {
 	protected String HTTP_URL;
 	protected HttpRequestBase requestBase;
 	public String getContent() {
-		sessionid = LoginUtil.getSession().get("s_sessionid");
+//		sessionid = LoginUtil.getSession().get("s_sessionid");
 		try {
 			DefaultHttpClient mHttpClient = new DefaultHttpClient();
 			requestBase.setHeader("Cookie","sessionid="+sessionid);

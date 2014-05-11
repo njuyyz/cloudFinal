@@ -4,6 +4,7 @@ import java.util.EnumSet;
 import java.util.List;
 
 import helper.LoginHelper;
+import helper.UploadBasicInfoHelper;
 import model.UserInfo;
 
 import org.scribe.model.Token;
@@ -16,6 +17,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+
 import com.google.code.linkedinapi.client.LinkedInApiClient;
 import com.google.code.linkedinapi.client.LinkedInApiClientFactory;
 import com.google.code.linkedinapi.client.enumeration.ProfileField;
@@ -71,8 +73,7 @@ public class AuthActivity extends Activity {
 											accessToken.getToken(),
 											accessToken.getSecret());
 							Person profile = client.getProfileForCurrentUser(EnumSet
-									.of(	
-											ProfileField.FIRST_NAME,
+									.of(ProfileField.FIRST_NAME,
 											ProfileField.LAST_NAME,
 											ProfileField.HEADLINE,
 											ProfileField.EDUCATIONS,
@@ -86,11 +87,14 @@ public class AuthActivity extends Activity {
 											ProfileField.LANGUAGES,
 											ProfileField.EDUCATIONS_SCHOOL_NAME,
 											ProfileField.MAIN_ADDRESS,
-											ProfileField.PICTURE_URL
-									));
+											ProfileField.PICTURE_URL));
 
-							
+							// record user info into LoginHelper
 							LoginHelper.userInfo = new UserInfo(profile);
+							
+							// upload the user info into our server
+							UploadBasicInfoHelper.uploadBasicInfo(LoginHelper.userInfo.convertToJson());
+							
 							String associations = profile.getAssociations();
 							Log.i("google", "associations:" + associations);
 
@@ -151,19 +155,19 @@ public class AuthActivity extends Activity {
 								}
 							}
 							profile.getLocation();
-							
+
 							String mainAddress = profile.getMainAddress();
 							Log.i("google", "main address:" + mainAddress);
-							
+
 							String pictureUrl = profile.getPictureUrl();
 							Log.i("google", "picture:" + pictureUrl);
-							
+
 							profile.getPositions();
 							profile.getPublications();
 							profile.getPublicProfileUrl();
 							profile.getSkills();
 							profile.getSpecialties();
-							
+
 							String summary = profile.getSummary();
 							Log.i("google", "summary:" + summary);
 							Log.i("google", "Name:" + profile.getFirstName()

@@ -21,7 +21,7 @@ public class LoginHelper {
 	public static OAuthService mService;
 	public static Token requestToken;
 	
-	public static UserInfo userInfo;
+	public static UserInfo userInfo; 
 
 	private static String authUrl;
 	

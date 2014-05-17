@@ -1,17 +1,29 @@
 package info.androidhive.slidingmenu;
 
+import helper.LoginHelper;
+
+import java.io.BufferedInputStream;
+import java.io.IOException;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
+
+import model.UserInfo;
 
 import com.nhaarman.listviewanimations.ArrayAdapter;
 import com.nhaarman.listviewanimations.itemmanipulation.ExpandableListItemAdapter;
 import com.nhaarman.listviewanimations.swinginadapters.prepared.SwingBottomInAnimationAdapter;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -33,27 +45,24 @@ public class CommunityFragment extends Fragment {
 	@Override
 	public void onStart() {
 		super.onStart();
-		ArrayList<Integer> list = new ArrayList<Integer>();
-		list.add(1);
-		list.add(2);
-		list.add(1);
-		list.add(2);
-		list.add(1);
-		list.add(2);
-		list.add(1);
-		list.add(2);
-		list.add(1);
-		list.add(2);
-		list.add(1);
-		list.add(2);
-		list.add(1);
-		list.add(2);
-		list.add(1);
-		list.add(2);
-		list.add(1);
-		list.add(2);
-		list.add(1);
-		list.add(2);
+		ArrayList<UserInfo> list = new ArrayList<UserInfo>();
+		list.add(LoginHelper.userInfo);
+		list.add(LoginHelper.userInfo);
+		list.add(LoginHelper.userInfo);
+		list.add(LoginHelper.userInfo);
+		list.add(LoginHelper.userInfo);
+		list.add(LoginHelper.userInfo);
+		list.add(LoginHelper.userInfo);
+		list.add(LoginHelper.userInfo);
+		list.add(LoginHelper.userInfo);
+		list.add(LoginHelper.userInfo);
+		list.add(LoginHelper.userInfo);
+		list.add(LoginHelper.userInfo);
+		list.add(LoginHelper.userInfo);
+		list.add(LoginHelper.userInfo);
+		list.add(LoginHelper.userInfo);
+		list.add(LoginHelper.userInfo);
+		list.add(LoginHelper.userInfo);
 		MyListAdapter mAdapter = new MyListAdapter(getActivity(), list);
 		SwingBottomInAnimationAdapter adapter = new SwingBottomInAnimationAdapter(
 				mAdapter);
@@ -62,13 +71,14 @@ public class CommunityFragment extends Fragment {
 		lv.setAdapter(adapter);
 	}
 
-	private static class MyListAdapter extends ExpandableListItemAdapter<Integer> {
+	private static class MyListAdapter extends
+			ExpandableListItemAdapter<UserInfo> {
 
 		private final Context mContext;
 
 		public MyListAdapter(final Context context,
-				final ArrayList<Integer> items) {
-			super(context,items);
+				final ArrayList<UserInfo> items) {
+			super(context, items);
 			mContext = context;
 		}
 
@@ -81,7 +91,6 @@ public class CommunityFragment extends Fragment {
 		public boolean hasStableIds() {
 			return true;
 		}
-
 
 		@Override
 		public View getContentView(final int position, final View convertView,
@@ -100,13 +109,52 @@ public class CommunityFragment extends Fragment {
 		public View getTitleView(final int position, final View convertView,
 				final ViewGroup parent) {
 			// TODO Auto-generated method stub
-			TextView tv = (TextView) convertView;
-			if (tv == null) {
-				tv = (TextView) LayoutInflater.from(mContext).inflate(
-						R.layout.list_row, parent, false);
+			LayoutInflater inflater = (LayoutInflater) mContext
+					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+			View rowView = inflater.inflate(R.layout.contact_namecard_basic,
+					parent, false);
+
+			UserInfo profile = getItem(position);
+			String name = profile.getFirstName() + " " + profile.getLastName()
+					+ " ";
+			TextView nameTV = (TextView) rowView.findViewById(R.id.basic_name);
+			nameTV.setText(name);
+			TextView phoneTV = (TextView) rowView.findViewById(R.id.phone);
+			String phone = profile.getPhoneList()[0];
+			phoneTV.setText(phone);
+			TextView emailTV = (TextView) rowView.findViewById(R.id.email);
+			emailTV.setText(profile.getEducationList()[0]);
+			ImageView thumbNailIV = (ImageView) rowView
+					.findViewById(R.id.thumbnail);
+			try {
+				Thread t = new Thread() {
+					public void run() {
+						try {
+							URL thumb_u = new URL(
+									LoginHelper.userInfo.getPicUrl());
+							final URLConnection conn = thumb_u.openConnection();
+							conn.connect();
+							final BufferedInputStream bis = new BufferedInputStream(
+									conn.getInputStream());
+							final Bitmap bm = BitmapFactory.decodeStream(bis);
+							bis.close();
+							LoginHelper.userInfo.setThumbNail(bm);
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+
+					}
+				};
+				t.start();
+				t.join();
+
+				thumbNailIV.setImageBitmap(profile.getThumbNail());
+			} catch (Exception e) {
+
 			}
-			tv.setText("This is row number " + getItem(position)+"\n hahahaha");
-			return tv;
+
+			return rowView;
 		}
 	}
 }

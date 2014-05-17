@@ -91,7 +91,7 @@ public class ProfileFragment extends Fragment {
 
 				@Override
 				public void onClick(View v) {
-					Log.i("google",LoginHelper.userInfo.getVideoUrl());
+//					Log.i("google",LoginHelper.userInfo.getVideoUrl());
 					// TODO Auto-generated method stub
 					ImageView expandIV = (ImageView) getActivity()
 							.findViewById(R.id.extend_namecard);

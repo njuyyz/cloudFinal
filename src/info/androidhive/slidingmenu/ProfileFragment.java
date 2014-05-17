@@ -37,12 +37,14 @@ public class ProfileFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.profile, container, false);
+		Log.i("profile fragment","on create");
 
 		return view;
 	}
 
 	@Override
 	public void onStart() {
+		Log.i("profile fragment", "on start");
 		super.onStart();
 		UserInfo profile = LoginHelper.userInfo;
 		String name = profile.getFirstName() + " " + profile.getLastName()
@@ -91,7 +93,7 @@ public class ProfileFragment extends Fragment {
 
 				@Override
 				public void onClick(View v) {
-					Log.i("google",LoginHelper.userInfo.getVideoUrl());
+//					Log.i("google",LoginHelper.userInfo.getVideoUrl());
 					// TODO Auto-generated method stub
 					ImageView expandIV = (ImageView) getActivity()
 							.findViewById(R.id.extend_namecard);

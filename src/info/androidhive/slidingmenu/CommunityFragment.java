@@ -3,6 +3,7 @@ package info.androidhive.slidingmenu;
 import java.util.ArrayList;
 
 import com.nhaarman.listviewanimations.ArrayAdapter;
+import com.nhaarman.listviewanimations.itemmanipulation.ExpandableListItemAdapter;
 import com.nhaarman.listviewanimations.swinginadapters.prepared.SwingBottomInAnimationAdapter;
 
 import android.app.Fragment;
@@ -61,13 +62,13 @@ public class CommunityFragment extends Fragment {
 		lv.setAdapter(adapter);
 	}
 
-	private static class MyListAdapter extends ArrayAdapter<Integer> {
+	private static class MyListAdapter extends ExpandableListItemAdapter<Integer> {
 
 		private final Context mContext;
 
 		public MyListAdapter(final Context context,
 				final ArrayList<Integer> items) {
-			super(items);
+			super(context,items);
 			mContext = context;
 		}
 
@@ -81,15 +82,30 @@ public class CommunityFragment extends Fragment {
 			return true;
 		}
 
+
 		@Override
-		public View getView(final int position, final View convertView,
+		public View getContentView(final int position, final View convertView,
 				final ViewGroup parent) {
+			// TODO Auto-generated method stub
 			TextView tv = (TextView) convertView;
 			if (tv == null) {
 				tv = (TextView) LayoutInflater.from(mContext).inflate(
 						R.layout.list_row, parent, false);
 			}
 			tv.setText("This is row number " + getItem(position));
+			return tv;
+		}
+
+		@Override
+		public View getTitleView(final int position, final View convertView,
+				final ViewGroup parent) {
+			// TODO Auto-generated method stub
+			TextView tv = (TextView) convertView;
+			if (tv == null) {
+				tv = (TextView) LayoutInflater.from(mContext).inflate(
+						R.layout.list_row, parent, false);
+			}
+			tv.setText("This is row number " + getItem(position)+"\n hahahaha");
 			return tv;
 		}
 	}

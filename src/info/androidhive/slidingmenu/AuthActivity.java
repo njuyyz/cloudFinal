@@ -94,7 +94,7 @@ public class AuthActivity extends Activity {
 							
 							// upload the user info into our server
 							UploadBasicInfoHelper.uploadBasicInfo(LoginHelper.userInfo.convertToJson());
-							
+							Log.i("upload info","upload infor");
 							String associations = profile.getAssociations();
 							Log.i("google", "associations:" + associations);
 

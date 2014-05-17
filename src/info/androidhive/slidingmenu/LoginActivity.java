@@ -121,6 +121,7 @@ public class LoginActivity extends Activity {
 
 				// create file and write id into the file
 				writeId();
+				LoginHelper.tryLogin(LoginHelper.userInfo.getId());
 
 				jumpToMainActivity();
 

@@ -1,5 +1,7 @@
 package info.androidhive.slidingmenu;
 
+import helper.LoginHelper;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -8,8 +10,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-import model.UserInfo;
-import helper.LoginHelper;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;

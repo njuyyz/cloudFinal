@@ -2,16 +2,15 @@ package info.androidhive.slidingmenu;
 
 import helper.JSONHelper;
 import helper.LoginHelper;
-
 import java.io.Console;
 import java.util.ArrayList;
 import java.util.List;
-
 import model.Constant;
 import model.Neighbor;
 import model.UserInfo;
 import util.GetRequest;
 import util.PicUtil;
+import android.annotation.SuppressLint;
 import android.app.Fragment;
 import android.content.Context;
 import android.location.Criteria;
@@ -26,7 +25,6 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
-
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
@@ -84,6 +82,7 @@ public class FindPeopleFragment extends Fragment {
 		imageLoader.displayImage(url, imageView, options, PicUtil.animateListener);
 	}
 
+	@SuppressLint("NewApi")
 	private class FetchNearPeopleTask extends
 			AsyncTask<Void, Void, List<Neighbor>> {
 		Context context;
@@ -120,6 +119,9 @@ public class FindPeopleFragment extends Fragment {
 					Neighbor nei = neiList.get(i);
 					displayIcon(nei.picURL, iconList[i]);
 				}
+			}
+			for (int i = neiList.size(); i < 3; i++){
+				iconList[i].setBackground(null);
 			}
 		}
 	}

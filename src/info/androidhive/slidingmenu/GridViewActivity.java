@@ -10,12 +10,15 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.os.Build;
+import helper.LoginHelper;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import model.UserInfo;
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -52,7 +55,23 @@ public class GridViewActivity extends Activity {
 	public OnItemClickListener listener = new OnItemClickListener()	{
 		public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
 			Toast.makeText(GridViewActivity.this, "" + position, Toast.LENGTH_SHORT).show();
+		
+			String idString = LoginHelper.userInfo.getId();
+			String styleString = "" + position;
+			
+			// this str[] is for updating the database
+			String[] str = {idString, styleString};
+			
+			// send back data to previous activity
+			Intent returnIntent = new Intent();
+			returnIntent.putExtra("styleId", styleString);
+			setResult(RESULT_OK,returnIntent);
+			finish();
 		}
+		
+		
+		
+		
 	};
 
 	@SuppressLint("InlinedApi")

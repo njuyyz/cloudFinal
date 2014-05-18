@@ -7,7 +7,9 @@ import java.util.ArrayList;
 
 import model.UserInfo;
 import util.PicUtil;
+import android.app.Activity;
 import android.app.Fragment;
+import android.app.FragmentManager;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -16,6 +18,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -24,11 +29,15 @@ import android.widget.TextView;
 import com.nhaarman.listviewanimations.itemmanipulation.ExpandableListItemAdapter;
 import com.nhaarman.listviewanimations.swinginadapters.prepared.AlphaInAnimationAdapter;
 import com.nhaarman.listviewanimations.swinginadapters.prepared.SwingBottomInAnimationAdapter;
+import com.nhaarman.listviewanimations.swinginadapters.prepared.SwingLeftInAnimationAdapter;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
 
 public class CommunityFragment extends Fragment {
 
+	
+	ArrayList<UserInfo> list = null;
+	
 	public CommunityFragment() {
 	}
 
@@ -45,7 +54,7 @@ public class CommunityFragment extends Fragment {
 	@Override
 	public void onStart() {
 		super.onStart();
-		ArrayList<UserInfo> list = new ArrayList<UserInfo>();
+		list = new ArrayList<UserInfo>();
 		list.add(LoginHelper.userInfo);
 		list.add(LoginHelper.userInfo);
 		list.add(LoginHelper.userInfo);
@@ -63,29 +72,45 @@ public class CommunityFragment extends Fragment {
 		list.add(LoginHelper.userInfo);
 		list.add(LoginHelper.userInfo);
 		list.add(LoginHelper.userInfo);
-		MyListAdapter mAdapter = new MyListAdapter(getActivity(), list);
+		MyListAdapter mAdapter = new MyListAdapter(getActivity(),R.layout.contact_namecard_basic, list);
 		ListView lv = (ListView) getActivity().findViewById(R.id.contact_list);
 		
-		AlphaInAnimationAdapter alphaInAnimationAdapter = new AlphaInAnimationAdapter(mAdapter);
+		SwingBottomInAnimationAdapter alphaInAnimationAdapter = new SwingBottomInAnimationAdapter(mAdapter);
         alphaInAnimationAdapter.setAbsListView(lv);
-        alphaInAnimationAdapter.setInitialDelayMillis(500);
+        alphaInAnimationAdapter.setInitialDelayMillis(800);
         lv.setAdapter(alphaInAnimationAdapter);
+        
+        lv.setOnItemClickListener(new OnItemClickListener(){
+
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int position,
+					long arg3) {
+				UserInfo userInfo = list.get(position);
+				
+				DetailFragment fragment = new DetailFragment();
+				fragment.userInfo = userInfo;
+				FragmentManager fragmentManager = getFragmentManager();
+				fragmentManager.beginTransaction()
+						.replace(R.id.frame_container, fragment).addToBackStack( null ).commit();
+
+				
+			}
+        	
+        });
 		
 		
 	}
 
 	private static class MyListAdapter extends
-			ExpandableListItemAdapter<UserInfo> {
+			ArrayAdapter<UserInfo> {
 
 		private final Context mContext;
 
 		private ImageLoader imageLoader;
 
-		public MyListAdapter(final Context context,
+		public MyListAdapter(final Context context,int layoutResourceId,
 				final ArrayList<UserInfo> items) {
-			super(context, R.layout.contacts,
-					R.id.activity_expandablelistitem_card_title,
-					R.id.activity_expandablelistitem_card_content, items);
+			super(context, layoutResourceId, items);
 
 			mContext = context;
 			imageLoader = new ImageLoader(mContext);
@@ -101,37 +126,9 @@ public class CommunityFragment extends Fragment {
 			return true;
 		}
 
-		@Override
-		public View getContentView(final int position, final View convertView,
-				final ViewGroup parent) {
-			// TODO Auto-generated method stub
-
-			// View rowView = convertView;
-			// if (rowView == null) {
-			// rowView =
-			// LayoutInflater.from(mContext).inflate(R.layout.contact_namecard_basic,null);
-			// }
-//			View view = (RelativeLayout) convertView;
-//			if (view == null) {
-//				LayoutInflater inflater = (LayoutInflater) mContext
-//						.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-//				view = inflater.inflate(R.layout.contact_namecard_basic,
-//						parent, false);
-//
-//			}
-//			return view;
-			
-			TextView imageView = (TextView) convertView;
-            if (imageView == null) {
-                imageView = new TextView(mContext);
-            }
-            imageView.setText("sha bi");
-
-            return imageView;
-		}
 
 		@Override
-		public View getTitleView(final int position, final View convertView,
+		public View getView(final int position, final View convertView,
 				final ViewGroup parent) {
 			UserInfo currentNewsFeed = getItem(position);
 			View view = convertView;

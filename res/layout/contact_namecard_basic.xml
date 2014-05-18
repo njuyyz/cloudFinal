@@ -1,6 +1,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="200dp"
     android:animateLayoutChanges="false"
     android:background="@drawable/picture_frame"
     android:orientation="vertical"
@@ -40,7 +40,7 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@id/phone"
         android:layout_below="@id/phone"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="40dp"
         android:text="TextView" />
 
 </RelativeLayout>

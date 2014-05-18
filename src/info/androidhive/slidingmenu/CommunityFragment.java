@@ -68,7 +68,7 @@ public class CommunityFragment extends Fragment {
 		MyListAdapter mAdapter = new MyListAdapter(getActivity(),R.layout.contact_namecard_basic, list);
 		ListView lv = (ListView) getActivity().findViewById(R.id.contact_list);
 		
-		SwingLeftInAnimationAdapter alphaInAnimationAdapter = new SwingLeftInAnimationAdapter(mAdapter);
+		SwingBottomInAnimationAdapter alphaInAnimationAdapter = new SwingBottomInAnimationAdapter(mAdapter);
         alphaInAnimationAdapter.setAbsListView(lv);
         alphaInAnimationAdapter.setInitialDelayMillis(500);
         lv.setAdapter(alphaInAnimationAdapter);

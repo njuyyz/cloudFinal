@@ -2,9 +2,12 @@ package info.androidhive.slidingmenu;
 
 import helper.LoginHelper;
 
+import java.io.Console;
 import java.util.List;
 
+import model.Constant;
 import model.UserInfo;
+import util.GetRequest;
 import util.PicUtil;
 import android.app.Fragment;
 import android.content.Context;
@@ -29,7 +32,7 @@ import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
 
 public class FindPeopleFragment extends Fragment {
 	boolean finish = false;
-	
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -86,7 +89,11 @@ public class FindPeopleFragment extends Fragment {
 			UserInfo curUser = LoginHelper.userInfo;
 			String uId = curUser.getId();
 			double[] location = getLocation(context);
-			Log.e(">>>", location[0] + ", " + location[1]);
+			String requestURL = String.format(Constant.RADAR_REQUEST, uId,
+					location[0], location[1]);
+			GetRequest request = new GetRequest(requestURL);
+			String res = request.getContent();
+			Log.e(">>>", res);
 			return null;
 		}
 
@@ -117,7 +124,7 @@ public class FindPeopleFragment extends Fragment {
 
 		return location;
 	}
-	
+
 	@Override
 	public void onDestroy() {
 		super.onDestroy();

@@ -12,7 +12,7 @@ public class Constant {
 			+ "/get_contacts?uid=";
 	public final static String CHANGE_STYLE = SERVER_ADDRESS
 			+ "/setstyle?uid=%s&styleid=%s";
-	public final static String CHANGE_STYLE2 = "&styleid=";
+	public final static String RADAR_REQUEST = SERVER_ADDRESS + "/uid=%s&latitude=%f&longitude=%f";
 
 	public final static String[] styles = { "#FFFFFF", "#DDDDDD", "#AAAAAA",
 			"#0074D9", "#7FDBFF", "#39CCCC", "#3D9970", "#2ECC40", "#01FF70",

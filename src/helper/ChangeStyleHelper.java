@@ -10,7 +10,6 @@ public class ChangeStyleHelper extends
 
 	@Override
 	protected Void doInBackground(String... params) {
-		new GetRequest(Constant.CHANGE_STYLE + params[0] + Constant.CHANGE_STYLE2 + params[1]);
 		return null;
 	}
 

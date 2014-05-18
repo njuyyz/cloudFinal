@@ -6,6 +6,7 @@ import helper.LoginHelper;
 
 import java.util.ArrayList;
 
+import model.Constant;
 import model.UserInfo;
 import util.PicUtil;
 import android.app.Activity;
@@ -124,6 +125,8 @@ public class CommunityFragment extends Fragment {
 				view = inflater.inflate(R.layout.contact_namecard_basic,
 						parent, false);
 
+				RelativeLayout rl = (RelativeLayout) view.findViewById(R.id.contact_namecard_bgcolor);
+				rl.setBackgroundResource(Constant.styles[Integer.parseInt(currentNewsFeed.getStyleUrl())]);
 				holder = this.new ViewHolder();
 				UserInfo profile = getItem(position);
 				String name = profile.getFirstName() + " "

@@ -85,7 +85,7 @@ public class FindPeopleFragment extends Fragment {
 	}
 
 	private class FetchNearPeopleTask extends
-			AsyncTask<Void, Void, List<UserInfo>> {
+			AsyncTask<Void, Void, List<Neighbor>> {
 		Context context;
 		View root;
 
@@ -95,7 +95,7 @@ public class FindPeopleFragment extends Fragment {
 		}
 
 		@Override
-		protected List<UserInfo> doInBackground(Void... params) {
+		protected List<Neighbor> doInBackground(Void... params) {
 			UserInfo curUser = LoginHelper.userInfo;
 			String uId = curUser.getId();
 			double[] location = getLocation(context);
@@ -105,6 +105,12 @@ public class FindPeopleFragment extends Fragment {
 			String res = request.getContent();
 			Log.e(">>>", res);
 			ArrayList<Neighbor> neiList = JSONHelper.getNeighbor(res);
+			return neiList;
+		}
+
+		@Override
+		protected void onPostExecute(List<Neighbor> neiList) {
+			super.onPostExecute(neiList);
 			ImageView[] iconList = new ImageView[3];
 			iconList[0] = (ImageView) root.findViewById(R.id.contact1);
 			iconList[1] = (ImageView) root.findViewById(R.id.contact2);
@@ -115,12 +121,6 @@ public class FindPeopleFragment extends Fragment {
 					displayIcon(nei.picURL, iconList[i]);
 				}
 			}
-			return null;
-		}
-
-		@Override
-		protected void onPostExecute(List<UserInfo> result) {
-			super.onPostExecute(result);
 		}
 	}
 

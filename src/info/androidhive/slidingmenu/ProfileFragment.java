@@ -274,7 +274,8 @@ public class ProfileFragment extends Fragment {
 		// Log.i("change2",""+styleId);
 		RelativeLayout rl2 = (RelativeLayout) getActivity().findViewById(
 				R.id.detail_namecard_bgcolor);
-		rl2.setBackgroundResource(Constant.styles[styleId]);
+		if(rl2!=null)
+			rl2.setBackgroundResource(Constant.styles[styleId]);
 		// Log.i("change3",""+styleId);
 		LoginHelper.userInfo.setStyleUrl("" + styleId);
 	}

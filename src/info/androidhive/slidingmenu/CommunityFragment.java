@@ -1,5 +1,6 @@
 package info.androidhive.slidingmenu;
 
+import helper.GetContactHelper;
 import helper.ImageLoader;
 import helper.LoginHelper;
 
@@ -36,7 +37,7 @@ import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
 public class CommunityFragment extends Fragment {
 
 	
-	ArrayList<UserInfo> list = null;
+	public static ArrayList<UserInfo> list = null;
 	
 	public CommunityFragment() {
 	}
@@ -55,25 +56,9 @@ public class CommunityFragment extends Fragment {
 	public void onStart() {
 		super.onStart();
 		list = new ArrayList<UserInfo>();
-		list.add(LoginHelper.userInfo);
-		list.add(LoginHelper.userInfo);
-		list.add(LoginHelper.userInfo);
-		list.add(LoginHelper.userInfo);
-		list.add(LoginHelper.userInfo);
-		list.add(LoginHelper.userInfo);
-		list.add(LoginHelper.userInfo);
-		list.add(LoginHelper.userInfo);
-		list.add(LoginHelper.userInfo);
-		list.add(LoginHelper.userInfo);
-		list.add(LoginHelper.userInfo);
-		list.add(LoginHelper.userInfo);
-		list.add(LoginHelper.userInfo);
-		list.add(LoginHelper.userInfo);
-		list.add(LoginHelper.userInfo);
-		list.add(LoginHelper.userInfo);
-		list.add(LoginHelper.userInfo);
 		MyListAdapter mAdapter = new MyListAdapter(getActivity(),R.layout.contact_namecard_basic, list);
 		ListView lv = (ListView) getActivity().findViewById(R.id.contact_list);
+		new GetContactHelper(getActivity(),mAdapter).execute(LoginHelper.userInfo.getId());
 		
 		SwingBottomInAnimationAdapter alphaInAnimationAdapter = new SwingBottomInAnimationAdapter(mAdapter);
         alphaInAnimationAdapter.setAbsListView(lv);

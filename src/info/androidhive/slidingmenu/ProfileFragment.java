@@ -25,6 +25,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.MediaController;
@@ -57,6 +58,19 @@ public class ProfileFragment extends Fragment {
 		phoneTV.setText(phone);
 		TextView emailTV = (TextView) getActivity().findViewById(R.id.email);
 		emailTV.setText(profile.getEducationList()[0]);
+		
+		Button bt = (Button) getActivity().findViewById(R.id.change_bg);
+		bt.setOnClickListener(new OnClickListener(){
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Intent changebgIntent = new Intent(getActivity(),GridViewActivity.class);
+				startActivityForResult(changebgIntent, 2); 
+			}
+			
+		});
+		
 		ImageView thumbNailIV = (ImageView) getActivity().findViewById(
 				R.id.thumbnail);
 		try {
@@ -215,6 +229,10 @@ public class ProfileFragment extends Fragment {
 			new UploadVideoHelper(getActivity()).execute(LoginHelper.userInfo.getId(),LoginHelper.userInfo.getVideoUrl());
 			
 			insertVideo();
+		}
+		else if( requestCode == 2){
+			String styleId = data.getStringExtra("styleId");
+			
 		}
 	}
 

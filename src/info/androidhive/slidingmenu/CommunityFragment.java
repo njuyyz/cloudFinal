@@ -16,6 +16,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -24,6 +25,7 @@ import android.widget.TextView;
 import com.nhaarman.listviewanimations.itemmanipulation.ExpandableListItemAdapter;
 import com.nhaarman.listviewanimations.swinginadapters.prepared.AlphaInAnimationAdapter;
 import com.nhaarman.listviewanimations.swinginadapters.prepared.SwingBottomInAnimationAdapter;
+import com.nhaarman.listviewanimations.swinginadapters.prepared.SwingLeftInAnimationAdapter;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
 
@@ -63,10 +65,10 @@ public class CommunityFragment extends Fragment {
 		list.add(LoginHelper.userInfo);
 		list.add(LoginHelper.userInfo);
 		list.add(LoginHelper.userInfo);
-		MyListAdapter mAdapter = new MyListAdapter(getActivity(), list);
+		MyListAdapter mAdapter = new MyListAdapter(getActivity(),R.layout.contact_namecard_basic, list);
 		ListView lv = (ListView) getActivity().findViewById(R.id.contact_list);
 		
-		AlphaInAnimationAdapter alphaInAnimationAdapter = new AlphaInAnimationAdapter(mAdapter);
+		SwingLeftInAnimationAdapter alphaInAnimationAdapter = new SwingLeftInAnimationAdapter(mAdapter);
         alphaInAnimationAdapter.setAbsListView(lv);
         alphaInAnimationAdapter.setInitialDelayMillis(500);
         lv.setAdapter(alphaInAnimationAdapter);
@@ -75,17 +77,15 @@ public class CommunityFragment extends Fragment {
 	}
 
 	private static class MyListAdapter extends
-			ExpandableListItemAdapter<UserInfo> {
+			ArrayAdapter<UserInfo> {
 
 		private final Context mContext;
 
 		private ImageLoader imageLoader;
 
-		public MyListAdapter(final Context context,
+		public MyListAdapter(final Context context,int layoutResourceId,
 				final ArrayList<UserInfo> items) {
-			super(context, R.layout.contacts,
-					R.id.activity_expandablelistitem_card_title,
-					R.id.activity_expandablelistitem_card_content, items);
+			super(context, layoutResourceId, items);
 
 			mContext = context;
 			imageLoader = new ImageLoader(mContext);
@@ -101,37 +101,9 @@ public class CommunityFragment extends Fragment {
 			return true;
 		}
 
-		@Override
-		public View getContentView(final int position, final View convertView,
-				final ViewGroup parent) {
-			// TODO Auto-generated method stub
-
-			// View rowView = convertView;
-			// if (rowView == null) {
-			// rowView =
-			// LayoutInflater.from(mContext).inflate(R.layout.contact_namecard_basic,null);
-			// }
-//			View view = (RelativeLayout) convertView;
-//			if (view == null) {
-//				LayoutInflater inflater = (LayoutInflater) mContext
-//						.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-//				view = inflater.inflate(R.layout.contact_namecard_basic,
-//						parent, false);
-//
-//			}
-//			return view;
-			
-			TextView imageView = (TextView) convertView;
-            if (imageView == null) {
-                imageView = new TextView(mContext);
-            }
-            imageView.setText("sha bi");
-
-            return imageView;
-		}
 
 		@Override
-		public View getTitleView(final int position, final View convertView,
+		public View getView(final int position, final View convertView,
 				final ViewGroup parent) {
 			UserInfo currentNewsFeed = getItem(position);
 			View view = convertView;

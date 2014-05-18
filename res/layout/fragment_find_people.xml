@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    
+    android:layout_height="match_parent"
+    android:background="@drawable/radar_search_starbg" >
+
+    <!--
     <TextView
         android:id="@+id/txtLabel"
          android:layout_width="wrap_content"
@@ -17,6 +19,13 @@
         android:src="@drawable/ic_people"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"/>
-    
+    -->
+
+    <ImageView
+        android:id="@+id/radar_rotate_wave_iv"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_centerInParent="true"
+        android:src="@drawable/radar_scan_light" />
 
 </RelativeLayout>

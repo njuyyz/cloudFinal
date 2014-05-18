@@ -57,7 +57,7 @@ public class GridViewActivity extends Activity {
 			Toast.makeText(GridViewActivity.this, "" + position, Toast.LENGTH_SHORT).show();
 		
 			String idString = LoginHelper.userInfo.getId();
-			int styleString = position;
+			int styleString = position%10;
 			
 			// this str[] is for updating the database
 			ChangeStyleHelper csh = new ChangeStyleHelper(v.getContext());

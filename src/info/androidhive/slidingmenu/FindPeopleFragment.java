@@ -117,11 +117,12 @@ public class FindPeopleFragment extends Fragment {
 			for (int i = 0; i < 3; i++){
 				if (i < neiList.size()){
 					Neighbor nei = neiList.get(i);
+					iconList[i].setVisibility(View.VISIBLE);
 					displayIcon(nei.picURL, iconList[i]);
 				}
 			}
 			for (int i = neiList.size(); i < 3; i++){
-				iconList[i].setBackground(null);
+				iconList[i].setVisibility(View.GONE);
 			}
 		}
 	}

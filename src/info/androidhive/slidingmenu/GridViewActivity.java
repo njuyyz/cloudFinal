@@ -51,7 +51,6 @@ public class GridViewActivity extends Activity {
 	// 8  LIME #01FF70
 	// 9  YELLOW #FFDC00
 
-	
 	public OnItemClickListener listener = new OnItemClickListener()	{
 		public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
 			Toast.makeText(GridViewActivity.this, "" + position, Toast.LENGTH_SHORT).show();
@@ -68,9 +67,6 @@ public class GridViewActivity extends Activity {
 			setResult(RESULT_OK,returnIntent);
 			finish();
 		}
-		
-		
-		
 		
 	};
 

@@ -1,11 +1,14 @@
 package info.androidhive.slidingmenu;
 
+import helper.JSONHelper;
 import helper.LoginHelper;
 
 import java.io.Console;
+import java.util.ArrayList;
 import java.util.List;
 
 import model.Constant;
+import model.Neighbor;
 import model.UserInfo;
 import util.GetRequest;
 import util.PicUtil;
@@ -32,13 +35,15 @@ import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
 
 public class FindPeopleFragment extends Fragment {
 	boolean finish = false;
+	ImageLoader imageLoader;
+	DisplayImageOptions options;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		ImageLoader imageLoader = ImageLoader.getInstance();
+		imageLoader = ImageLoader.getInstance();
 		imageLoader.init(ImageLoaderConfiguration.createDefault(getActivity()));
-		View rootView = inflater.inflate(R.layout.fragment_find_people,
+		final View rootView = inflater.inflate(R.layout.fragment_find_people,
 				container, false);
 		ImageView radarShaddow = (ImageView) rootView
 				.findViewById(R.id.radar_rotate_wave_iv);
@@ -47,22 +52,21 @@ public class FindPeopleFragment extends Fragment {
 				R.anim.rotate);
 		radarShaddow.startAnimation(rotation);
 		ImageView iconSelf = (ImageView) rootView.findViewById(R.id.icon_self);
-		DisplayImageOptions options = new DisplayImageOptions.Builder()
+		options = new DisplayImageOptions.Builder()
 				.showStubImage(R.drawable.ic_stub)
 				.showImageForEmptyUri(R.drawable.ic_empty)
 				.showImageOnFail(R.drawable.ic_error).cacheInMemory()
 				.imageScaleType(ImageScaleType.EXACTLY_STRETCHED).cacheOnDisc()
 				.displayer(new RoundedBitmapDisplayer(500)).build();
 		UserInfo user = LoginHelper.userInfo;
-		imageLoader.displayImage(user.getPicUrl(), iconSelf, options,
-				PicUtil.animateListener);
+		displayIcon(user.getPicUrl(), iconSelf);
 
 		// get icon every 3 seconds
 		Thread fetchThread = new Thread(new Runnable() {
 			@Override
 			public void run() {
 				while (!finish) {
-					new FetchNearPeopleTask(getActivity()).execute();
+					new FetchNearPeopleTask(getActivity(), rootView).execute();
 					try {
 						Thread.sleep(3000);
 					} catch (InterruptedException e) {
@@ -75,13 +79,19 @@ public class FindPeopleFragment extends Fragment {
 
 		return rootView;
 	}
+	
+	private void displayIcon(String url, ImageView imageView){
+		imageLoader.displayImage(url, imageView, options, PicUtil.animateListener);
+	}
 
 	private class FetchNearPeopleTask extends
 			AsyncTask<Void, Void, List<UserInfo>> {
 		Context context;
+		View root;
 
-		public FetchNearPeopleTask(Context context) {
+		public FetchNearPeopleTask(Context context, View root) {
 			this.context = context;
+			this.root = root;
 		}
 
 		@Override
@@ -94,6 +104,17 @@ public class FindPeopleFragment extends Fragment {
 			GetRequest request = new GetRequest(requestURL);
 			String res = request.getContent();
 			Log.e(">>>", res);
+			ArrayList<Neighbor> neiList = JSONHelper.getNeighbor(res);
+			ImageView[] iconList = new ImageView[3];
+			iconList[0] = (ImageView) root.findViewById(R.id.contact1);
+			iconList[1] = (ImageView) root.findViewById(R.id.contact2);
+			iconList[2] = (ImageView) root.findViewById(R.id.contact3);
+			for (int i = 0; i < 3; i++){
+				if (i < neiList.size()){
+					Neighbor nei = neiList.get(i);
+					displayIcon(nei.picURL, iconList[i]);
+				}
+			}
 			return null;
 		}
 
@@ -122,7 +143,8 @@ public class FindPeopleFragment extends Fragment {
 			location[1] = l.getLongitude();
 		}
 
-		return location;
+		// return location;
+		return new double[]{0,0};
 	}
 
 	@Override

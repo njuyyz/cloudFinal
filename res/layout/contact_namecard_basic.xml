@@ -1,10 +1,10 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#d0d0d0"
-    android:paddingBottom="20dp"
     android:animateLayoutChanges="false"
-    android:orientation="vertical" >
+    android:background="@drawable/picture_frame"
+    android:orientation="vertical"
+    android:paddingBottom="20dp" >
 
     <ImageView
         android:id="@+id/thumbnail"
@@ -38,10 +38,9 @@
         android:id="@+id/email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
         android:layout_alignLeft="@id/phone"
         android:layout_below="@id/phone"
+        android:layout_marginBottom="20dp"
         android:text="TextView" />
-    
-	
+
 </RelativeLayout>

@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.os.Build;
+import helper.ChangeStyleHelper;
 import helper.LoginHelper;
 
 import java.util.ArrayList;
@@ -59,8 +60,8 @@ public class GridViewActivity extends Activity {
 			String styleString = "" + position;
 			
 			// this str[] is for updating the database
-			String[] str = {idString, styleString};
-			
+			ChangeStyleHelper csh = new ChangeStyleHelper(v.getContext());
+			csh.execute(idString,styleString);
 			// send back data to previous activity
 			Intent returnIntent = new Intent();
 			returnIntent.putExtra("styleId", styleString);

@@ -59,7 +59,7 @@ public class ProfileFragment extends Fragment {
 		TextView emailTV = (TextView) getActivity().findViewById(R.id.email);
 		emailTV.setText(profile.getEducationList()[0]);
 		
-		Button bt = (Button) getActivity().findViewById(R.id.change_bg);
+		ImageButton bt = (ImageButton) getActivity().findViewById(R.id.change_bg);
 		bt.setOnClickListener(new OnClickListener(){
 
 			@Override
@@ -232,8 +232,12 @@ public class ProfileFragment extends Fragment {
 		}
 		else if( requestCode == 2){
 			String styleId = data.getStringExtra("styleId");
+			changeStyleId(styleId);
 			
 		}
+	}
+	private void changeStyleId(String styleId){
+		
 	}
 
 }

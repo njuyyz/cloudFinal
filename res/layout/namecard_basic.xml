@@ -1,7 +1,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#d0d0d0"
+    android:id="@+id/namecard_bgcolor"
+    android:background="#0074d9"
     android:paddingBottom="20dp"
     android:animateLayoutChanges="false"
     android:orientation="vertical" >

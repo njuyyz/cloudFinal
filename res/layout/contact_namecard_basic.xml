@@ -6,38 +6,45 @@
     android:orientation="vertical"
     android:paddingBottom="20dp" >
 
-    <ImageView
-        android:id="@+id/thumbnail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="43dp"
-        android:layout_marginTop="28dp"
-        android:src="@drawable/ic_photos" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/contact_namecard_bgcolor"
+        android:background="#0074d9" >
 
-    <TextView
-        android:id="@+id/basic_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@id/thumbnail"
-        android:layout_marginLeft="30dp"
-        android:layout_toRightOf="@id/thumbnail"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        <ImageView
+            android:id="@+id/thumbnail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="43dp"
+            android:layout_marginTop="28dp"
+            android:src="@drawable/ic_photos" />
 
-    <TextView
-        android:id="@+id/phone"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@id/basic_name"
-        android:layout_below="@id/basic_name"/>
+        <TextView
+            android:id="@+id/basic_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/thumbnail"
+            android:layout_marginLeft="30dp"
+            android:layout_toRightOf="@id/thumbnail"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
 
-    <TextView
-        android:id="@+id/email"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@id/phone"
-        android:layout_below="@id/phone"
-        android:layout_marginBottom="40dp"/>
+        <TextView
+            android:id="@+id/phone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/basic_name"
+            android:layout_below="@id/basic_name" />
+
+        <TextView
+            android:id="@+id/email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/phone"
+            android:layout_below="@id/phone"
+            android:layout_marginBottom="40dp" />
+    </RelativeLayout>
 
 </RelativeLayout>

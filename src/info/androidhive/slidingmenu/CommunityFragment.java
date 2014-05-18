@@ -7,7 +7,9 @@ import java.util.ArrayList;
 
 import model.UserInfo;
 import util.PicUtil;
+import android.app.Activity;
 import android.app.Fragment;
+import android.app.FragmentManager;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -16,6 +18,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -31,6 +35,9 @@ import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
 
 public class CommunityFragment extends Fragment {
 
+	
+	ArrayList<UserInfo> list = null;
+	
 	public CommunityFragment() {
 	}
 
@@ -47,7 +54,7 @@ public class CommunityFragment extends Fragment {
 	@Override
 	public void onStart() {
 		super.onStart();
-		ArrayList<UserInfo> list = new ArrayList<UserInfo>();
+		list = new ArrayList<UserInfo>();
 		list.add(LoginHelper.userInfo);
 		list.add(LoginHelper.userInfo);
 		list.add(LoginHelper.userInfo);
@@ -70,8 +77,26 @@ public class CommunityFragment extends Fragment {
 		
 		SwingBottomInAnimationAdapter alphaInAnimationAdapter = new SwingBottomInAnimationAdapter(mAdapter);
         alphaInAnimationAdapter.setAbsListView(lv);
-        alphaInAnimationAdapter.setInitialDelayMillis(500);
+        alphaInAnimationAdapter.setInitialDelayMillis(800);
         lv.setAdapter(alphaInAnimationAdapter);
+        
+        lv.setOnItemClickListener(new OnItemClickListener(){
+
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int position,
+					long arg3) {
+				UserInfo userInfo = list.get(position);
+				
+				DetailFragment fragment = new DetailFragment();
+				fragment.userInfo = userInfo;
+				FragmentManager fragmentManager = getFragmentManager();
+				fragmentManager.beginTransaction()
+						.replace(R.id.frame_container, fragment).addToBackStack( null ).commit();
+
+				
+			}
+        	
+        });
 		
 		
 	}

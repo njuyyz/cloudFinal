@@ -8,7 +8,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.net.URLConnection;
 
+import model.Constant;
 import model.UserInfo;
+import android.app.Activity;
 import android.app.Fragment;
 import android.content.ContentValues;
 import android.content.Context;
@@ -34,11 +36,30 @@ import android.widget.TextView;
 import android.widget.VideoView;
 
 public class ProfileFragment extends Fragment {
+	View views;
+	UserInfo profile;
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.profile, container, false);
-		Log.i("profile fragment","on create");
+		views = view;
+		Log.i("profile fragment", "on create");
+		profile = LoginHelper.userInfo;
+
+		if (profile.getStyleUrl() != null && profile.getStyleUrl() != "null") {
+
+			RelativeLayout rl = (RelativeLayout) view.findViewById(R.id.namecard_bgcolor);
+
+			int styleId = Integer.parseInt(profile.getStyleUrl());
+			rl.setBackgroundColor(Constant.styles[styleId]);
+
+			Log.i("change2", "" + styleId);
+//			RelativeLayout rl2 = (RelativeLayout) layoutInflater.inflate(
+//					R.layout.namecard_detail, (ViewGroup) views, false);
+//
+
+		}
 
 		return view;
 	}
@@ -58,19 +79,22 @@ public class ProfileFragment extends Fragment {
 		phoneTV.setText(phone);
 		TextView emailTV = (TextView) getActivity().findViewById(R.id.email);
 		emailTV.setText(profile.getEducationList()[0]);
-		
-		ImageButton bt = (ImageButton) getActivity().findViewById(R.id.change_bg);
-		bt.setOnClickListener(new OnClickListener(){
+
+		ImageButton bt = (ImageButton) getActivity().findViewById(
+				R.id.change_bg);
+		bt.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Intent changebgIntent = new Intent(getActivity(),GridViewActivity.class);
-				startActivityForResult(changebgIntent, 2); 
+				Intent changebgIntent = new Intent(getActivity(),
+						GridViewActivity.class);
+
+				startActivityForResult(changebgIntent, 2);
 			}
-			
+
 		});
-		
+
 		ImageView thumbNailIV = (ImageView) getActivity().findViewById(
 				R.id.thumbnail);
 		try {
@@ -95,7 +119,7 @@ public class ProfileFragment extends Fragment {
 			t.start();
 			t.join();
 
-//			LoginHelper.userInkfo.setVideoUrl("null");
+			// LoginHelper.userInkfo.setVideoUrl("null");
 			// insert video
 			insertVideo();
 
@@ -107,7 +131,7 @@ public class ProfileFragment extends Fragment {
 
 				@Override
 				public void onClick(View v) {
-//					Log.i("google",LoginHelper.userInfo.getVideoUrl());
+					// Log.i("google",LoginHelper.userInfo.getVideoUrl());
 					// TODO Auto-generated method stub
 					ImageView expandIV = (ImageView) getActivity()
 							.findViewById(R.id.extend_namecard);
@@ -122,12 +146,16 @@ public class ProfileFragment extends Fragment {
 					RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
 							LayoutParams.WRAP_CONTENT,
 							LayoutParams.WRAP_CONTENT);
-					params.addRule(RelativeLayout.BELOW, R.id.namecard_top);
+					params.addRule(RelativeLayout.BELOW, R.id.namecard_bgcolor);
 
 					mynewlayout.addView(layoutInflater.inflate(
 							R.layout.namecard_detail, mynewlayout, false),
 							params);
 
+
+					RelativeLayout rl2 = (RelativeLayout) getActivity()
+							.findViewById(R.id.detail_namecard_bgcolor);
+					rl2.setBackgroundResource(Constant.styles[Integer.parseInt(LoginHelper.userInfo.getStyleUrl())]);
 					TextView summaryTV = (TextView) getActivity().findViewById(
 							R.id.summary);
 					summaryTV.setText(LoginHelper.userInfo.getSummary());
@@ -200,12 +228,13 @@ public class ProfileFragment extends Fragment {
 			Log.i("google", "add view");
 			VideoView videoView = (VideoView) getActivity().findViewById(
 					R.id.video);
-			videoView.setVideoURI(Uri.parse(LoginHelper.userInfo.getVideoUrl()));
+			videoView
+					.setVideoURI(Uri.parse(LoginHelper.userInfo.getVideoUrl()));
 			Log.i("google", LoginHelper.userInfo.getVideoUrl());
 			// videoView.setMediaController(new MediaController(this));
 			videoView.requestFocus();
 			videoView.setMediaController(new MediaController(getActivity()));
-//			videoView.start();
+			// videoView.start();
 		}
 
 	}
@@ -213,31 +242,51 @@ public class ProfileFragment extends Fragment {
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (requestCode == 1) {
-			
+
 			Uri videoUri = data.getData();
 			RelativeLayout record_button_layout = (RelativeLayout) getActivity()
 					.findViewById(R.id.record_button_layout);
 			record_button_layout.setVisibility(View.GONE);
-			
+
 			String[] proj = { MediaStore.Images.Media.DATA };
-		    Cursor cursor = getActivity().getContentResolver().query(videoUri,  proj, null, null, null);
-		    int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-		    cursor.moveToFirst();
-			
+			Cursor cursor = getActivity().getContentResolver().query(videoUri,
+					proj, null, null, null);
+			int column_index = cursor
+					.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+			cursor.moveToFirst();
+
 			LoginHelper.userInfo.setVideoUrl(cursor.getString(column_index));
 
-			new UploadVideoHelper(getActivity()).execute(LoginHelper.userInfo.getId(),LoginHelper.userInfo.getVideoUrl());
-			
+			new UploadVideoHelper(getActivity()).execute(
+					LoginHelper.userInfo.getId(),
+					LoginHelper.userInfo.getVideoUrl());
+
 			insertVideo();
-		}
-		else if( requestCode == 2){
-			String styleId = data.getStringExtra("styleId");
+		} else if (requestCode == 2 && resultCode == Activity.RESULT_OK) {
+			Log.i("requestcode", "requestCode");
+			Bundle b = data.getExtras();
+			int styleId = b.getInt("styleId");
+			Log.i("null", "" + styleId);
 			changeStyleId(styleId);
-			
+
 		}
 	}
-	private void changeStyleId(String styleId){
+
+	private void changeStyleId(int styleId) {
+		 Log.i("change3",""+styleId);
+		 RelativeLayout rl = (RelativeLayout)
+		 views.findViewById(R.id.namecard_bgcolor);
+//		 rl.setBackgroundColor(Constant.styles[styleId]);
+		 rl.setBackgroundResource(Constant.styles[styleId]);
+//		 views.refreshDrawableState();
+//		 views.invalidate();
 		
+//		 Log.i("change2",""+styleId);
+		 RelativeLayout rl2 = (RelativeLayout)
+		 getActivity().findViewById(R.id.detail_namecard_bgcolor);
+		 rl2.setBackgroundResource(Constant.styles[styleId]);
+//		 Log.i("change3",""+styleId);
+		LoginHelper.userInfo.setStyleUrl("" + styleId);
 	}
 
 }

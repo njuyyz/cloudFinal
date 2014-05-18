@@ -36,39 +36,29 @@ import android.widget.TextView;
 import android.widget.VideoView;
 
 public class ProfileFragment extends Fragment {
-	View views;
+	View view;
 	UserInfo profile;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.profile, container, false);
-		views = view;
-		Log.i("profile fragment", "on create");
+
+		view = inflater.inflate(R.layout.profile, container, false);
 		profile = LoginHelper.userInfo;
+		RelativeLayout rl = (RelativeLayout) view
+				.findViewById(R.id.namecard_bgcolor);
 
-		if (profile.getStyleUrl() != null && profile.getStyleUrl() != "null") {
-
-			RelativeLayout rl = (RelativeLayout) view.findViewById(R.id.namecard_bgcolor);
-
-			int styleId = Integer.parseInt(profile.getStyleUrl());
-			rl.setBackgroundColor(Constant.styles[styleId]);
-
-			Log.i("change2", "" + styleId);
-//			RelativeLayout rl2 = (RelativeLayout) layoutInflater.inflate(
-//					R.layout.namecard_detail, (ViewGroup) views, false);
-//
-
-		}
+		Log.i("styleid",profile.getStyleUrl());
+		int styleId = Integer.parseInt(profile.getStyleUrl());
+		rl.setBackgroundResource(Constant.styles[styleId]);
 
 		return view;
 	}
 
 	@Override
 	public void onStart() {
-		Log.i("profile fragment", "on start");
 		super.onStart();
-		UserInfo profile = LoginHelper.userInfo;
+		profile = LoginHelper.userInfo;
 		String name = profile.getFirstName() + " " + profile.getLastName()
 				+ " ";
 		TextView nameTV = (TextView) getActivity()
@@ -152,10 +142,10 @@ public class ProfileFragment extends Fragment {
 							R.layout.namecard_detail, mynewlayout, false),
 							params);
 
-
 					RelativeLayout rl2 = (RelativeLayout) getActivity()
 							.findViewById(R.id.detail_namecard_bgcolor);
-					rl2.setBackgroundResource(Constant.styles[Integer.parseInt(LoginHelper.userInfo.getStyleUrl())]);
+					rl2.setBackgroundResource(Constant.styles[Integer
+							.parseInt(LoginHelper.userInfo.getStyleUrl())]);
 					TextView summaryTV = (TextView) getActivity().findViewById(
 							R.id.summary);
 					summaryTV.setText(LoginHelper.userInfo.getSummary());
@@ -273,19 +263,19 @@ public class ProfileFragment extends Fragment {
 	}
 
 	private void changeStyleId(int styleId) {
-		 Log.i("change3",""+styleId);
-		 RelativeLayout rl = (RelativeLayout)
-		 views.findViewById(R.id.namecard_bgcolor);
-//		 rl.setBackgroundColor(Constant.styles[styleId]);
-		 rl.setBackgroundResource(Constant.styles[styleId]);
-//		 views.refreshDrawableState();
-//		 views.invalidate();
-		
-//		 Log.i("change2",""+styleId);
-		 RelativeLayout rl2 = (RelativeLayout)
-		 getActivity().findViewById(R.id.detail_namecard_bgcolor);
-		 rl2.setBackgroundResource(Constant.styles[styleId]);
-//		 Log.i("change3",""+styleId);
+		Log.i("change3", "" + styleId);
+		RelativeLayout rl = (RelativeLayout) view
+				.findViewById(R.id.namecard_bgcolor);
+		// rl.setBackgroundColor(Constant.styles[styleId]);
+		rl.setBackgroundResource(Constant.styles[styleId]);
+		// views.refreshDrawableState();
+		// views.invalidate();
+
+		// Log.i("change2",""+styleId);
+		RelativeLayout rl2 = (RelativeLayout) getActivity().findViewById(
+				R.id.detail_namecard_bgcolor);
+		rl2.setBackgroundResource(Constant.styles[styleId]);
+		// Log.i("change3",""+styleId);
 		LoginHelper.userInfo.setStyleUrl("" + styleId);
 	}
 

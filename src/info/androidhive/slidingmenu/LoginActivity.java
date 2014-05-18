@@ -28,8 +28,10 @@ public class LoginActivity extends Activity {
 		super.onCreate(savedInstanceState);
 
 		// get id from recordFile
+		Log.i(">>>log in ", "before test id");
 		String id = getId();
 		if (id != null) {
+			Log.i(">>>log in", "id = "+id);
 			LoginHelper.tryLogin(id);
 
 			jumpToMainActivity();

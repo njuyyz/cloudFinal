@@ -32,6 +32,7 @@ public class LoginHelper {
 				GetRequest gr = new GetRequest(
 						Constant.GET_USER_INFO+id);
 				JSONObject jsonObject = (JSONObject) JSONValue.parse(gr.getContent());
+				Log.i("try login ", "try");
 				try {
 						String id = (String)jsonObject.get("u_id");
 						if( id.equals("0")){

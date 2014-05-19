@@ -85,17 +85,26 @@ public class UserInfo {
 			educationBuffer.append(educationList[i] + ":");
 			// result.append( optional separator );
 		}
-		String educationString = educationBuffer.substring(0,
-				educationBuffer.length() - 1);
-		object.put("educations", educationString);
-
+		if (educationBuffer.length() - 1 > 0) {
+			String educationString = educationBuffer.substring(0,
+					educationBuffer.length() - 1);
+			object.put("educations", educationString);
+		}else{
+			object.put("educations", "");
+		}
 		StringBuffer phoneBuffer = new StringBuffer();
 		for (int i = 0; i < phoneList.length; i++) {
 			phoneBuffer.append(phoneList[i] + ":");
 			// result.append( optional separator );
 		}
-		String phoneString = phoneBuffer.substring(0, phoneBuffer.length() - 1);
-		object.put("phone_numbers", phoneString);
+		if (phoneBuffer.length() - 1 > 0) {
+			String phoneString = phoneBuffer.substring(0,
+					phoneBuffer.length() - 1);
+			object.put("phone_numbers", phoneString);
+		} else {
+
+			object.put("phone_numbers", "");
+		}
 
 		object.put("industry", industry);
 		object.put("honors", null);
@@ -108,10 +117,14 @@ public class UserInfo {
 			languageBuffer.append(languageList[i] + ":");
 			// result.append( optional separator );
 		}
-		String languageString = languageBuffer.substring(0,
-				languageBuffer.length() - 1);
-		object.put("languages", languageString);
+		if (languageBuffer.length() - 1 > 0) {
+			String languageString = languageBuffer.substring(0,
+					languageBuffer.length() - 1);
+			object.put("languages", languageString);
+		} else {
 
+			object.put("languages", "");
+		}
 		object.put("main_address", mainAddress);
 		object.put("picture_url", picUrl);
 		object.put("video_url", videoUrl);
@@ -127,22 +140,30 @@ public class UserInfo {
 		lastName = profile.getLastName();
 		headline = profile.getHeadline();
 		Educations educations = profile.getEducations();
-		List<Education> educationss = educations.getEducationList();
-		ArrayList<String> schoolList = new ArrayList<String>();
-		educationList = new String[educationss.size()];
-		for (Education e : educationss) {
-			schoolList.add(e.getSchoolName());
-		}
-		educationList = schoolList.toArray(educationList);
+		educationList = new String[] { "" };
+		if (educations != null) {
 
-		PhoneNumbers pns = profile.getPhoneNumbers();
-		List<PhoneNumber> pnList = pns.getPhoneNumberList();
-		ArrayList<String> phoneNumberList = new ArrayList<String>();
-		phoneList = new String[phoneNumberList.size()];
-		for (PhoneNumber pn : pnList) {
-			phoneNumberList.add(pn.getPhoneNumber());
+			List<Education> educationss = educations.getEducationList();
+			ArrayList<String> schoolList = new ArrayList<String>();
+			educationList = new String[educationss.size()];
+			for (Education e : educationss) {
+				schoolList.add(e.getSchoolName());
+			}
+			educationList = schoolList.toArray(educationList);
+
 		}
-		phoneList = phoneNumberList.toArray(phoneList);
+		PhoneNumbers pns = profile.getPhoneNumbers();
+		phoneList = new String[] { "" };
+		if (pns != null) {
+			List<PhoneNumber> pnList = pns.getPhoneNumberList();
+			ArrayList<String> phoneNumberList = new ArrayList<String>();
+			phoneList = new String[phoneNumberList.size()];
+			for (PhoneNumber pn : pnList) {
+				phoneNumberList.add(pn.getPhoneNumber());
+			}
+			phoneList = phoneNumberList.toArray(phoneList);
+
+		}
 
 		industry = profile.getIndustry();
 
@@ -158,13 +179,16 @@ public class UserInfo {
 		}
 		currentStatus = profile.getCurrentStatus();
 		Languages languages = profile.getLanguages();
-		List<Language> languagess = languages.getLanguageList();
-		ArrayList<String> ll = new ArrayList<String>();
-		languageList = new String[ll.size()];
-		for (Language l : languagess) {
-			ll.add(l.getLanguage().getName());
+		languageList = new String[] { "" };
+		if (languages != null) {
+			List<Language> languagess = languages.getLanguageList();
+			ArrayList<String> ll = new ArrayList<String>();
+			languageList = new String[ll.size()];
+			for (Language l : languagess) {
+				ll.add(l.getLanguage().getName());
+			}
+			languageList = ll.toArray(languageList);
 		}
-		languageList = ll.toArray(languageList);
 		mainAddress = profile.getMainAddress();
 		picUrl = profile.getPictureUrl();
 		videoUrl = null;

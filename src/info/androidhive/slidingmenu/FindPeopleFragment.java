@@ -23,6 +23,7 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -130,6 +131,7 @@ public class FindPeopleFragment extends Fragment {
 			ArrayList<Neighbor> neiList = new ArrayList<Neighbor>();
 			if (res != null) {
 				neiList = JSONHelper.getNeighbor(res);
+				Log.e(">>>", res);
 			}
 			return neiList;
 		}
@@ -152,6 +154,7 @@ public class FindPeopleFragment extends Fragment {
 				if (i < neiList.size()) {
 					Neighbor nei = neiList.get(i);
 					iconList[i].setVisibility(View.VISIBLE);
+					progressBarList[i].setVisibility(View.VISIBLE);
 					displayIcon(nei.picURL, iconList[i]);
 				}
 			}

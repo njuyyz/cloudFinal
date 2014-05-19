@@ -11,16 +11,8 @@
 
         <RelativeLayout
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent" >
-<!-- 
-            <ImageButton
-                android:id="@+id/change_bg"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentTop="true"
-                android:src="@drawable/camera_btn_nor" />
- -->
+            android:layout_height="wrap_content" >
+
             <RelativeLayout
                 android:id="@+id/nameLayout"
                 android:layout_width="match_parent"
@@ -35,53 +27,55 @@
                     android:layout_height="wrap_content"
                     android:animateLayoutChanges="false"
                     android:background="#0074d9"
-                    android:orientation="vertical"
-                    android:paddingBottom="20dp" >
+                    android:orientation="vertical" >
 
-                    <ImageView
-                        android:id="@+id/thumbnail"
-                        android:layout_width="wrap_content"
+                    <RelativeLayout
+                        android:id="@+id/test"
+                        android:gravity="center"
+                        android:layout_marginTop="60dp"
+                        android:layout_centerInParent="true"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentLeft="true"
-                        android:layout_alignParentTop="true"
-                        android:layout_marginLeft="43dp"
-                        android:layout_marginTop="28dp"
-                        android:src="@drawable/ic_photos" />
+                        android:animateLayoutChanges="false"
+                        android:orientation="vertical" >
 
-                    <TextView
-                        android:id="@+id/basic_name"
-                        android:layout_width="300dp"
-                        android:layout_height="wrap_content"
-                        android:layout_alignTop="@id/thumbnail"
-                        android:layout_marginLeft="30dp"
-                        android:layout_toRightOf="@id/thumbnail"
-                        android:text="Large Text"
-                        android:textAppearance="?android:attr/textAppearanceLarge" />
+                        <ImageView
+                            android:id="@+id/thumbnail"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentTop="true"
+                            android:src="@drawable/ic_photos" />
 
-                    <TextView
-                        android:id="@+id/phone"
-                        android:layout_width="300dp"
-                        android:layout_height="wrap_content"
-                        android:layout_alignLeft="@id/basic_name"
-                        android:layout_below="@id/basic_name"
-                        android:text="TextView" />
+                        <TextView
+                            android:id="@+id/basic_name"
+                            android:layout_width="300dp"
+                            android:layout_height="wrap_content"
+                            android:layout_alignTop="@id/thumbnail"
+                            android:layout_marginLeft="30dp"
+                            android:layout_toRightOf="@id/thumbnail"
+                            android:text="Large Text"
+                            android:textAppearance="?android:attr/textAppearanceLarge"
+                            android:textSize="30sp" />
 
-                    <TextView
-                        android:id="@+id/email"
-                        android:layout_width="300dp"
-                        android:layout_height="wrap_content"
-                        android:layout_alignLeft="@id/phone"
-                        android:layout_below="@id/phone"
-                        android:layout_marginBottom="20dp"
-                        android:text="TextView" />
-<!-- 
-                    <ImageView
-                        android:id="@+id/extend_namecard"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/email"
-                        android:layout_centerHorizontal="true"
-                        android:src="@drawable/ic_action_new" /> -->
+                        <TextView
+                            android:id="@+id/phone"
+                            android:layout_width="300dp"
+                            android:layout_height="wrap_content"
+                            android:layout_alignLeft="@id/basic_name"
+                            android:layout_below="@id/basic_name"
+                            android:text="TextView"
+                            android:textSize="20sp" />
+
+                        <TextView
+                            android:id="@+id/email"
+                            android:layout_width="300dp"
+                            android:layout_height="wrap_content"
+                            android:layout_alignLeft="@id/phone"
+                            android:layout_below="@id/phone"
+                            android:text="TextView"
+                            android:textSize="20sp" />
+                    </RelativeLayout>
                 </RelativeLayout>
             </RelativeLayout>
 

@@ -15,13 +15,15 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
 import org.json.simple.JSONObject;
 
+import android.content.Context;
 import android.util.Log;
 
 public class PostRequest extends Request {
 
 	protected JSONObject param;
 
-	public PostRequest(String url, JSONObject param) {
+	public PostRequest(String url, JSONObject param,Context c) {
+		super(c);
 		this.HTTP_URL = url;
 		this.param = param;
 		StringEntity entity;

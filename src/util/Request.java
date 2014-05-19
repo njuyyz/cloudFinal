@@ -10,10 +10,17 @@ import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.impl.client.DefaultHttpClient;
 
+import android.content.Context;
+import android.widget.Toast;
+
 public class Request {
 	protected String sessionid;
 	protected String HTTP_URL;
 	protected HttpRequestBase requestBase;
+	protected Context mContext;
+	public Request(Context c){
+		mContext = c;
+	}
 	public String getContent() {
 //		sessionid = LoginUtil.getSession().get("s_sessionid");
 		try {
@@ -36,6 +43,8 @@ public class Request {
 					return builder.toString();
 
 				} else {
+					Toast t = Toast.makeText(mContext, "Please Check internet Connection", Toast.LENGTH_LONG);
+					t.show();
 					return null;
 				}
 			}

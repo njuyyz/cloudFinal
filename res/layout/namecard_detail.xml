@@ -1,20 +1,20 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/detail_namecard_bgcolor"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:id="@+id/detail_namecard_bgcolor"
     android:background="#0074d9"
     android:orientation="vertical"
-    android:layout_marginRight="20dp"
     android:paddingBottom="20dp" >
 
     <TextView
         android:id="@+id/summary"
-        android:layout_width="300dp"
+        android:layout_width="450dp"
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/summary_title"
-        android:layout_toRightOf="@+id/summary_title"
         android:layout_marginLeft="30dp"
-        android:text="TextView" />
+        android:layout_toRightOf="@+id/summary_title"
+        android:text="TextView"
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/summary_title"
@@ -29,19 +29,20 @@
 
     <TextView
         android:id="@+id/Educations"
-        android:layout_width="300dp"
+        android:layout_width="450dp"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/summary"
         android:layout_below="@+id/summary"
-        android:layout_marginTop="20dp"
-        android:text="TextView" />
+        android:layout_marginTop="40dp"
+        android:text="TextView"
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/EducationTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/Educations"
         android:layout_alignLeft="@+id/summary_title"
+        android:layout_alignTop="@+id/Educations"
         android:text="Educations"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 

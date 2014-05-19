@@ -30,7 +30,7 @@ public class GetContactHelper extends
 
 	@Override
 	protected ArrayList<UserInfo> doInBackground(String... params) {
-		GetRequest gr = new GetRequest(Constant.GET_CONTACTS + params[0]);
+		GetRequest gr = new GetRequest(Constant.GET_CONTACTS + params[0], mContext);
 		contactList = new ArrayList<UserInfo>();
 
 		JSONArray contactArray = (JSONArray) JSONValue.parse(gr.getContent());

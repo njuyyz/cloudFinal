@@ -124,7 +124,7 @@ public class FindPeopleFragment extends Fragment {
 			double[] location = getLocation(context);
 			String requestURL = String.format(Constant.RADAR_REQUEST, uId,
 					location[0], location[1]);
-			GetRequest request = new GetRequest(requestURL);
+			GetRequest request = new GetRequest(requestURL, getActivity());
 			String res = request.getContent();
 			ArrayList<Neighbor> neiList = new ArrayList<Neighbor>();
 			if (res != null) {

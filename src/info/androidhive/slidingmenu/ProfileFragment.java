@@ -54,7 +54,7 @@ public class ProfileFragment extends Fragment {
 		rl.setBackgroundResource(Constant.styles[styleId]);
 
 		
-		ActionBar ab = getActivity().getActionBar();
+		getActivity().getActionBar().show();
 		return view;
 	}
 
@@ -173,56 +173,6 @@ public class ProfileFragment extends Fragment {
 				}
 
 			});
-
-			// ImageView expandIV = (ImageView) getActivity().findViewById(
-			// R.id.extend_namecard);
-			// expandIV.setOnClickListener(new OnClickListener() {
-			//
-			// @Override
-			// public void onClick(View v) {
-			// // Log.i("google",LoginHelper.userInfo.getVideoUrl());
-			// // TODO Auto-generated method stub
-			// ImageView expandIV = (ImageView) getActivity()
-			// .findViewById(R.id.extend_namecard);
-			// expandIV.setVisibility(View.GONE);
-			//
-			// RelativeLayout mynewlayout = (RelativeLayout) getActivity()
-			// .findViewById(R.id.nameLayout);
-			// LayoutInflater layoutInflater = (LayoutInflater) getActivity()
-			// .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-			//
-			// // insert detail into the view
-			// RelativeLayout.LayoutParams params = new
-			// RelativeLayout.LayoutParams(
-			// LayoutParams.MATCH_PARENT,
-			// LayoutParams.WRAP_CONTENT);
-			// params.addRule(RelativeLayout.BELOW, R.id.namecard_bgcolor);
-			//
-			// mynewlayout.addView(layoutInflater.inflate(
-			// R.layout.namecard_detail, mynewlayout, false),
-			// params);
-			//
-			// RelativeLayout rl2 = (RelativeLayout) getActivity()
-			// .findViewById(R.id.detail_namecard_bgcolor);
-			// rl2.setBackgroundResource(Constant.styles[Integer
-			// .parseInt(LoginHelper.userInfo.getStyleUrl())]);
-			// TextView summaryTV = (TextView) getActivity().findViewById(
-			// R.id.summary);
-			// summaryTV.setText(LoginHelper.userInfo.getSummary());
-			//
-			// TextView EducationTV = (TextView) getActivity()
-			// .findViewById(R.id.Educations);
-			// String[] educationList = LoginHelper.userInfo
-			// .getEducationList();
-			// StringBuilder sb = new StringBuilder();
-			// for (String s : educationList) {
-			// sb.append(s + "\n");
-			// }
-			// EducationTV.setText(sb.toString());
-			//
-			// }
-			//
-			// });
 		} catch (Exception e) {
 			Log.i("google", e.toString());
 			// handle it
@@ -338,6 +288,13 @@ public class ProfileFragment extends Fragment {
 			rl2.setBackgroundResource(Constant.styles[styleId]);
 		// Log.i("change3",""+styleId);
 		LoginHelper.userInfo.setStyleUrl("" + styleId);
+	}
+	
+	@Override
+	public void onPause(){
+		
+//		getActivity().getActionBar().hide();
+		super.onPause();
 	}
 
 }

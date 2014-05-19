@@ -1,49 +1,64 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/detail_namecard_bgcolor"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:background="#0074d9"
     android:orientation="vertical"
     android:paddingBottom="20dp" >
 
-    <TextView
-        android:id="@+id/summary"
-        android:layout_width="450dp"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/summary_title"
-        android:layout_marginLeft="30dp"
-        android:layout_toRightOf="@+id/summary_title"
-        android:text="TextView"
-        android:textSize="20sp" />
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal" >
 
-    <TextView
-        android:id="@+id/summary_title"
-        android:layout_width="wrap_content"
+        <TextView
+            android:id="@+id/summary_title"
+            android:singleLine="true"
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
+            android:text="Summary"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <TextView
+            android:id="@+id/summary"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="40dp"
+            android:layout_weight="4"
+            android:text="TextView"
+            android:textSize="20sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="40dp"
-        android:layout_marginRight="30dp"
-        android:text="Summary"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal" >
 
-    <TextView
-        android:id="@+id/Educations"
-        android:layout_width="450dp"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/summary"
-        android:layout_below="@+id/summary"
-        android:layout_marginTop="40dp"
-        android:text="TextView"
-        android:textSize="20sp" />
+        <TextView
+            android:singleLine="true"
+            android:id="@+id/EducationTitle"
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
+            android:text="Educations"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
 
-    <TextView
-        android:id="@+id/EducationTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/summary_title"
-        android:layout_alignTop="@+id/Educations"
-        android:text="Educations"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        <TextView
+            android:id="@+id/Educations"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="40dp"
+            android:layout_weight="4"
+            android:text="TextView"
+            android:textSize="20sp" />
 
-</RelativeLayout>
+    </LinearLayout>
+
+</LinearLayout>

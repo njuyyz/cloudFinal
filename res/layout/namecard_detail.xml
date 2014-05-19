@@ -1,19 +1,19 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+    android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:id="@+id/detail_namecard_bgcolor"
     android:background="#0074d9"
     android:orientation="vertical"
-    android:layout_marginRight="40dp"
+    android:layout_marginRight="20dp"
     android:paddingBottom="20dp" >
 
     <TextView
         android:id="@+id/summary"
-        android:layout_width="wrap_content"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/summary_title"
         android:layout_toRightOf="@+id/summary_title"
-        android:layout_marginLeft="20dp"
+        android:layout_marginLeft="30dp"
         android:text="TextView" />
 
     <TextView
@@ -22,14 +22,14 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginLeft="24dp"
+        android:layout_marginLeft="40dp"
         android:layout_marginRight="30dp"
         android:text="Summary"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <TextView
         android:id="@+id/Educations"
-        android:layout_width="wrap_content"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/summary"
         android:layout_below="@+id/summary"

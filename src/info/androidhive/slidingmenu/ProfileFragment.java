@@ -10,6 +10,7 @@ import java.net.URLConnection;
 
 import model.Constant;
 import model.UserInfo;
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.ContentValues;
@@ -48,10 +49,12 @@ public class ProfileFragment extends Fragment {
 		RelativeLayout rl = (RelativeLayout) view
 				.findViewById(R.id.namecard_bgcolor);
 
-		Log.i("styleid",profile.getStyleUrl());
+		Log.i("styleid", profile.getStyleUrl());
 		int styleId = Integer.parseInt(profile.getStyleUrl());
 		rl.setBackgroundResource(Constant.styles[styleId]);
 
+		
+		ActionBar ab = getActivity().getActionBar();
 		return view;
 	}
 
@@ -114,55 +117,112 @@ public class ProfileFragment extends Fragment {
 			insertVideo();
 
 			thumbNailIV.setImageBitmap(profile.getThumbNail());
+			
+			RelativeLayout namecard = (RelativeLayout)view.findViewById(R.id.nameLayout);
 
-			ImageView expandIV = (ImageView) getActivity().findViewById(
-					R.id.extend_namecard);
-			expandIV.setOnClickListener(new OnClickListener() {
+			namecard.setOnClickListener(new OnClickListener() {
 
 				@Override
 				public void onClick(View v) {
-					// Log.i("google",LoginHelper.userInfo.getVideoUrl());
 					// TODO Auto-generated method stub
-					ImageView expandIV = (ImageView) getActivity()
-							.findViewById(R.id.extend_namecard);
-					expandIV.setVisibility(View.GONE);
 
-					RelativeLayout mynewlayout = (RelativeLayout) getActivity()
-							.findViewById(R.id.nameLayout);
-					LayoutInflater layoutInflater = (LayoutInflater) getActivity()
-							.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
-					// insert detail into the view
-					RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
-							LayoutParams.WRAP_CONTENT,
-							LayoutParams.WRAP_CONTENT);
-					params.addRule(RelativeLayout.BELOW, R.id.namecard_bgcolor);
-
-					mynewlayout.addView(layoutInflater.inflate(
-							R.layout.namecard_detail, mynewlayout, false),
-							params);
-
-					RelativeLayout rl2 = (RelativeLayout) getActivity()
+					View namebar = view
 							.findViewById(R.id.detail_namecard_bgcolor);
-					rl2.setBackgroundResource(Constant.styles[Integer
-							.parseInt(LoginHelper.userInfo.getStyleUrl())]);
-					TextView summaryTV = (TextView) getActivity().findViewById(
-							R.id.summary);
-					summaryTV.setText(LoginHelper.userInfo.getSummary());
+					if (namebar == null) {
+						Log.i("if null","null");
+						RelativeLayout mynewlayout = (RelativeLayout) getActivity()
+								.findViewById(R.id.nameLayout);
+						LayoutInflater layoutInflater = (LayoutInflater) getActivity()
+								.getSystemService(
+										Context.LAYOUT_INFLATER_SERVICE);
 
-					TextView EducationTV = (TextView) getActivity()
-							.findViewById(R.id.Educations);
-					String[] educationList = LoginHelper.userInfo
-							.getEducationList();
-					StringBuilder sb = new StringBuilder();
-					for (String s : educationList) {
-						sb.append(s + "\n");
+						// insert detail into the view
+						RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
+								LayoutParams.MATCH_PARENT,
+								LayoutParams.WRAP_CONTENT);
+						params.addRule(RelativeLayout.BELOW,
+								R.id.namecard_bgcolor);
+
+						mynewlayout.addView(layoutInflater.inflate(
+								R.layout.namecard_detail, mynewlayout, false),
+								params);
+
+						RelativeLayout rl2 = (RelativeLayout) getActivity()
+								.findViewById(R.id.detail_namecard_bgcolor);
+						rl2.setBackgroundResource(Constant.styles[Integer
+								.parseInt(LoginHelper.userInfo.getStyleUrl())]);
+						TextView summaryTV = (TextView) getActivity()
+								.findViewById(R.id.summary);
+						summaryTV.setText(LoginHelper.userInfo.getSummary());
+
+						TextView EducationTV = (TextView) getActivity()
+								.findViewById(R.id.Educations);
+						String[] educationList = LoginHelper.userInfo
+								.getEducationList();
+						StringBuilder sb = new StringBuilder();
+						for (String s : educationList) {
+							sb.append(s + "\n");
+						}
+						EducationTV.setText(sb.toString());
+					} else {
+						Log.i("if null","not null");
+						((RelativeLayout) namebar.getParent())
+								.removeView(namebar);
 					}
-					EducationTV.setText(sb.toString());
 
 				}
 
 			});
+
+			// ImageView expandIV = (ImageView) getActivity().findViewById(
+			// R.id.extend_namecard);
+			// expandIV.setOnClickListener(new OnClickListener() {
+			//
+			// @Override
+			// public void onClick(View v) {
+			// // Log.i("google",LoginHelper.userInfo.getVideoUrl());
+			// // TODO Auto-generated method stub
+			// ImageView expandIV = (ImageView) getActivity()
+			// .findViewById(R.id.extend_namecard);
+			// expandIV.setVisibility(View.GONE);
+			//
+			// RelativeLayout mynewlayout = (RelativeLayout) getActivity()
+			// .findViewById(R.id.nameLayout);
+			// LayoutInflater layoutInflater = (LayoutInflater) getActivity()
+			// .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+			//
+			// // insert detail into the view
+			// RelativeLayout.LayoutParams params = new
+			// RelativeLayout.LayoutParams(
+			// LayoutParams.MATCH_PARENT,
+			// LayoutParams.WRAP_CONTENT);
+			// params.addRule(RelativeLayout.BELOW, R.id.namecard_bgcolor);
+			//
+			// mynewlayout.addView(layoutInflater.inflate(
+			// R.layout.namecard_detail, mynewlayout, false),
+			// params);
+			//
+			// RelativeLayout rl2 = (RelativeLayout) getActivity()
+			// .findViewById(R.id.detail_namecard_bgcolor);
+			// rl2.setBackgroundResource(Constant.styles[Integer
+			// .parseInt(LoginHelper.userInfo.getStyleUrl())]);
+			// TextView summaryTV = (TextView) getActivity().findViewById(
+			// R.id.summary);
+			// summaryTV.setText(LoginHelper.userInfo.getSummary());
+			//
+			// TextView EducationTV = (TextView) getActivity()
+			// .findViewById(R.id.Educations);
+			// String[] educationList = LoginHelper.userInfo
+			// .getEducationList();
+			// StringBuilder sb = new StringBuilder();
+			// for (String s : educationList) {
+			// sb.append(s + "\n");
+			// }
+			// EducationTV.setText(sb.toString());
+			//
+			// }
+			//
+			// });
 		} catch (Exception e) {
 			Log.i("google", e.toString());
 			// handle it
@@ -274,7 +334,7 @@ public class ProfileFragment extends Fragment {
 		// Log.i("change2",""+styleId);
 		RelativeLayout rl2 = (RelativeLayout) getActivity().findViewById(
 				R.id.detail_namecard_bgcolor);
-		if(rl2!=null)
+		if (rl2 != null)
 			rl2.setBackgroundResource(Constant.styles[styleId]);
 		// Log.i("change3",""+styleId);
 		LoginHelper.userInfo.setStyleUrl("" + styleId);

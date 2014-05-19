@@ -72,7 +72,6 @@ public class FindPeopleFragment extends Fragment {
 		final HoloCircularProgressBar mHoloCircularProgressBar = (HoloCircularProgressBar) rootView
 				.findViewById(R.id.holoCircularProgressBar1);
 		mHoloCircularProgressBar.setProgress(0f);
-		mHoloCircularProgressBar.setProgressBackgroundColor(Color.BLUE);
 		iconSelf.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -81,7 +80,6 @@ public class FindPeopleFragment extends Fragment {
 				}
 				animate(mHoloCircularProgressBar, null, 0.5f, 1000);
 				mHoloCircularProgressBar.setMarkerProgress(1f);
-				mHoloCircularProgressBar.setProgressColor(Color.CYAN);
 			}
 		});
 		// get icon every 3 seconds

@@ -187,7 +187,7 @@ public class MainActivity extends Activity {
 			fragment = new CommunityFragment();
 			break;
 		case 3:
-			fragment = new TimeLineFragment();
+			// fragment = new TimeLineFragment();
 			break;
 		// case 4:
 		// fragment = new PagesFragment();

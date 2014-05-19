@@ -12,7 +12,7 @@
         <RelativeLayout
             android:layout_width="fill_parent"
             android:layout_height="fill_parent" >
-
+<!-- 
             <ImageButton
                 android:id="@+id/change_bg"
                 android:layout_width="wrap_content"
@@ -20,12 +20,12 @@
                 android:layout_alignParentRight="true"
                 android:layout_alignParentTop="true"
                 android:src="@drawable/camera_btn_nor" />
-
+ -->
             <RelativeLayout
                 android:id="@+id/nameLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/change_bg"
+                android:layout_alignParentTop="true"
                 android:background="@drawable/picture_frame"
                 android:orientation="vertical" >
 

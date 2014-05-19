@@ -74,15 +74,24 @@
             android:layout_gravity="center_horizontal"
             android:background="@drawable/picture_frame" 
             android:orientation="vertical">
+            
+            <LinearLayout 
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:orientation="vertical"
+            android:background="#000000">
 
             <LinearLayout
                 android:id="@+id/videoLayout"
                 android:layout_width="400dp"
                 android:layout_height="400dp"
                 android:layout_gravity="center_horizontal"
-                android:layout_margin="40dp"
+                android:layout_marginBottom="85dp"
+                android:layout_marginTop="20dp"
                 android:orientation="horizontal" >
             </LinearLayout>
+        </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 

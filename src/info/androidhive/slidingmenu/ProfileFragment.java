@@ -272,7 +272,7 @@ public class ProfileFragment extends Fragment {
 
 		}
 	}
-
+	
 	private void changeStyleId(int styleId) {
 		Log.i("change3", "" + styleId);
 		RelativeLayout rl = (RelativeLayout) view

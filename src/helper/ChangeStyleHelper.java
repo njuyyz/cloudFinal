@@ -24,7 +24,7 @@ public class ChangeStyleHelper extends
 	@Override
 	protected String doInBackground(String... params) {
 		String url = String.format(Constant.CHANGE_STYLE, params[0],params[1]);
-		GetRequest gr  = new GetRequest(url);
+		GetRequest gr  = new GetRequest(url, mContext);
 		String result = gr.getContent();
 		
 		return result;

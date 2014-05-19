@@ -11,6 +11,7 @@ import org.scribe.model.Token;
 import org.scribe.oauth.OAuthService;
 
 import util.GetRequest;
+import android.content.Context;
 import android.util.Log;
 
 public class LoginHelper {
@@ -25,12 +26,18 @@ public class LoginHelper {
 
 	private static String authUrl;
 	
+	private static Context mContext;
+	
+	public LoginHelper(Context c){
+		mContext = c;
+	}
+	
 	public static boolean tryLogin(final String id){
 		boolean islogined = false;
 		Thread s = new Thread(){
 			public void run(){
 				GetRequest gr = new GetRequest(
-						Constant.GET_USER_INFO+id);
+						Constant.GET_USER_INFO+id, mContext);
 				JSONObject jsonObject = (JSONObject) JSONValue.parse(gr.getContent());
 				Log.i("try login ", "try");
 				try {

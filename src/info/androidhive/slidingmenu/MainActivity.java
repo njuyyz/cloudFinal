@@ -179,9 +179,9 @@ public class MainActivity extends Activity {
 		case 2:
 			fragment = new CommunityFragment();
 			break;
-		// case 3:
-		// fragment = new CommunityFragment();
-		// break;
+		case 3:
+			fragment = new TimeLineFragment();
+			break;
 		// case 4:
 		// fragment = new PagesFragment();
 		// break;

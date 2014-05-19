@@ -1,18 +1,23 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:animateLayoutChanges="false"
-    android:background="#d0d0d0"
-    android:layout_gravity="center"
-    android:gravity="center"
-    android:orientation="vertical"
-    android:paddingTop="20dp"
-    android:paddingBottom="20dp" >
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
     <VideoView
         android:id="@+id/video"
-        
-         android:layout_width="480dp"
-         android:layout_height="600dp"/>
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true" >
+    </VideoView>
 
+    <FrameLayout
+        android:id="@+id/controllerAnchor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true" />
 
-</LinearLayout>
+</RelativeLayout>

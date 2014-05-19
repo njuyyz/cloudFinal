@@ -19,30 +19,30 @@
                 android:id="@+id/namecard_bgcolor"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:baselineAligned="false"
                 android:background="#0074d9"
+                android:baselineAligned="false"
                 android:orientation="horizontal" >
 
                 <LinearLayout
-                    android:layout_marginTop="40dp"
-                    android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
-                    android:layout_marginBottom="40dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="40dp"
                     android:layout_weight="1" >
 
                     <ImageView
                         android:id="@+id/thumbnail"
-                        android:layout_marginLeft="30dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_gravity="center_horizontal"
+                        android:scaleType="fitXY"
                         android:src="@drawable/ic_photos" />
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_marginTop="40dp"
-                    android:layout_marginBottom="40dp"
-                    android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="40dp"
+                    android:layout_marginTop="40dp"
                     android:layout_weight="4"
                     android:orientation="vertical" >
 
@@ -51,32 +51,47 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Large Text"
-                        android:textAppearance="?android:attr/textAppearanceLarge"
-                        android:textSize="30sp" />
+                        android:textAppearance="?android:attr/textAppearanceLarge" />
 
                     <TextView
                         android:id="@+id/phone"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="TextView"
-                        android:textSize="20sp" />
+                        android:text="TextView" />
 
                     <TextView
                         android:id="@+id/email"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="TextView"
-                        android:textSize="20sp" />
+                        android:text="TextView" />
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/videoLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/picture_frame"
-            android:orientation="horizontal" >
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/picture_frame" 
+            android:orientation="vertical">
+            
+            <LinearLayout 
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:orientation="vertical"
+            android:background="#000000">
+
+            <LinearLayout
+                android:id="@+id/videoLayout"
+                android:layout_width="400dp"
+                android:layout_height="400dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="85dp"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal" >
+            </LinearLayout>
+        </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 

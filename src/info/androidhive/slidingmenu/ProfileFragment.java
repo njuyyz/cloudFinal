@@ -28,6 +28,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -172,7 +173,7 @@ public class ProfileFragment extends Fragment {
 
 			});
 		} catch (Exception e) {
-			Log.i("google", e.toString());
+			Log.i("layout", e.toString());
 			// handle it
 		}
 
@@ -231,7 +232,9 @@ public class ProfileFragment extends Fragment {
 			Log.i("google", LoginHelper.userInfo.getVideoUrl());
 			// videoView.setMediaController(new MediaController(this));
 			videoView.requestFocus();
-			videoView.setMediaController(new MediaController(getActivity()));
+			MediaController mc =  new MyMediaController(getActivity(), (FrameLayout) getActivity().findViewById(R.id.controllerAnchor));
+			mc.setAnchorView(getActivity().findViewById(R.id.controllerAnchor));
+			videoView.setMediaController(mc);
 			// videoView.start();
 		}
 

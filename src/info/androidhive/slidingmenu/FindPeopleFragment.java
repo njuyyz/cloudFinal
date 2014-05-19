@@ -102,8 +102,10 @@ public class FindPeopleFragment extends Fragment {
 					location[0], location[1]);
 			GetRequest request = new GetRequest(requestURL);
 			String res = request.getContent();
-			Log.e(">>>", res);
-			ArrayList<Neighbor> neiList = JSONHelper.getNeighbor(res);
+			ArrayList<Neighbor> neiList = new ArrayList<Neighbor>();
+			if (res != null){
+				neiList = JSONHelper.getNeighbor(res);
+			}
 			return neiList;
 		}
 

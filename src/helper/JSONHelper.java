@@ -12,7 +12,7 @@ import org.json.simple.parser.ParseException;
 import android.util.Log;
 
 public class JSONHelper {
-	public static ArrayList<Neighbor> getNeighbor(String jsonStr){
+	public static ArrayList<Neighbor> getNeighbor(String jsonStr) {
 		ArrayList<Neighbor> neiList = new ArrayList<Neighbor>();
 		JSONParser parser = new JSONParser();
 		try {
@@ -20,12 +20,12 @@ public class JSONHelper {
 			for (int i = 0; i < neiArray.size(); i++) {
 				JSONObject neiJSON = (JSONObject) neiArray.get(i);
 				String uId = (String) neiJSON.get("u_id");
-				String firstName = (String)neiJSON.get("first_name");
+				String firstName = (String) neiJSON.get("first_name");
 				String lastName = (String) neiJSON.get("last_name");
 				String picURL = (String) neiJSON.get("picture_url");
-				String isConStr = (String) neiJSON.get("is_contact");
-				boolean isContact = isConStr.equals("true") ? true : false;
-				Neighbor nei = new Neighbor(uId, firstName, lastName, picURL, isContact);
+				String relationStr = (String) neiJSON.get("relation");
+				Neighbor nei = new Neighbor(uId, firstName, lastName, picURL,
+						Integer.parseInt(relationStr));
 				neiList.add(nei);
 			}
 		} catch (ParseException e) {

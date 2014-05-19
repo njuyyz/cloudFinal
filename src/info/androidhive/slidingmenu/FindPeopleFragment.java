@@ -12,14 +12,13 @@ import model.UserInfo;
 import util.GetRequest;
 import util.PicUtil;
 import android.animation.Animator;
+import android.animation.Animator.AnimatorListener;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
-import android.animation.Animator.AnimatorListener;
 import android.animation.ValueAnimator.AnimatorUpdateListener;
 import android.annotation.SuppressLint;
 import android.app.Fragment;
 import android.content.Context;
-import android.graphics.Color;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.AsyncTask;
@@ -45,6 +44,7 @@ public class FindPeopleFragment extends Fragment {
 	ImageLoader imageLoader;
 	DisplayImageOptions options;
 	private ObjectAnimator mProgressBarAnimator;
+	String uId;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -67,6 +67,7 @@ public class FindPeopleFragment extends Fragment {
 				.imageScaleType(ImageScaleType.EXACTLY_STRETCHED).cacheOnDisc()
 				.displayer(new RoundedBitmapDisplayer(500)).build();
 		UserInfo user = LoginHelper.userInfo;
+		uId = user.getId();
 		displayIcon(user.getPicUrl(), iconSelf);
 
 		final HoloCircularProgressBar mHoloCircularProgressBar = (HoloCircularProgressBar) rootView
@@ -137,9 +138,16 @@ public class FindPeopleFragment extends Fragment {
 		protected void onPostExecute(List<Neighbor> neiList) {
 			super.onPostExecute(neiList);
 			ImageView[] iconList = new ImageView[3];
+			HoloCircularProgressBar[] progressBarList = new HoloCircularProgressBar[3];
 			iconList[0] = (ImageView) root.findViewById(R.id.contact1);
 			iconList[1] = (ImageView) root.findViewById(R.id.contact2);
 			iconList[2] = (ImageView) root.findViewById(R.id.contact3);
+			progressBarList[0] = (HoloCircularProgressBar) root
+					.findViewById(R.id.holoCircularProgressBar1);
+			progressBarList[1] = (HoloCircularProgressBar) root
+					.findViewById(R.id.holoCircularProgressBar2);
+			progressBarList[2] = (HoloCircularProgressBar) root
+					.findViewById(R.id.holoCircularProgressBar3);
 			for (int i = 0; i < 3; i++) {
 				if (i < neiList.size()) {
 					Neighbor nei = neiList.get(i);
@@ -149,6 +157,7 @@ public class FindPeopleFragment extends Fragment {
 			}
 			for (int i = neiList.size(); i < 3; i++) {
 				iconList[i].setVisibility(View.GONE);
+				progressBarList[i].setVisibility(View.GONE);
 			}
 		}
 	}

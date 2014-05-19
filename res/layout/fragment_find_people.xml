@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:ProgressWheel="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res/info.androidhive.slidingmenu"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/radar_search_starbg" xmlns:app="http://schemas.android.com/apk/res/info.androidhive.slidingmenu">
+    android:background="@drawable/radar_search_starbg" >
 
     <ImageView
         android:id="@+id/radar_rotate_wave_iv"
@@ -19,14 +20,37 @@
         android:layout_centerInParent="true"
         android:adjustViewBounds="true"
         android:scaleType="fitXY" />
-    
+
     <de.passsy.holocircularprogressbar.HoloCircularProgressBar
         android:id="@+id/holoCircularProgressBar1"
         android:layout_width="120dp"
         android:layout_height="120dp"
-        android:layout_centerInParent="true"
-        app:progress_color="#ffff4444"
-        app:progress_background_color="@android:color/darker_gray" />
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="80dp"
+        android:visibility="gone"
+        app:progress_background_color="@android:color/darker_gray"
+        app:progress_color="#ffff4444" />
+
+    <de.passsy.holocircularprogressbar.HoloCircularProgressBar
+        android:id="@+id/holoCircularProgressBar2"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="170dp"
+        android:visibility="gone"
+        app:progress_background_color="@android:color/darker_gray"
+        app:progress_color="#ffff4444" />
+    
+    <de.passsy.holocircularprogressbar.HoloCircularProgressBar
+        android:id="@+id/holoCircularProgressBar3"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="170dp"
+        android:visibility="gone"
+        app:progress_background_color="@android:color/darker_gray"
+        app:progress_color="#ffff4444" />
 
     <ImageView
         android:id="@+id/contact2"
@@ -55,7 +79,5 @@
         android:layout_marginTop="80dp"
         android:adjustViewBounds="true"
         android:scaleType="fitXY" />
-
-    
 
 </RelativeLayout>

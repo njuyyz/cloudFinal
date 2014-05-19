@@ -2,39 +2,49 @@ package info.androidhive.slidingmenu;
 
 import helper.JSONHelper;
 import helper.LoginHelper;
-import java.io.Console;
+
 import java.util.ArrayList;
 import java.util.List;
+
 import model.Constant;
 import model.Neighbor;
 import model.UserInfo;
 import util.GetRequest;
 import util.PicUtil;
+import android.animation.Animator;
+import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
+import android.animation.Animator.AnimatorListener;
+import android.animation.ValueAnimator.AnimatorUpdateListener;
 import android.annotation.SuppressLint;
 import android.app.Fragment;
 import android.content.Context;
-import android.location.Criteria;
+import android.graphics.Color;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
 
+import de.passsy.holocircularprogressbar.HoloCircularProgressBar;
+
 public class FindPeopleFragment extends Fragment {
 	boolean finish = false;
 	ImageLoader imageLoader;
 	DisplayImageOptions options;
+	private ObjectAnimator mProgressBarAnimator;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -59,6 +69,21 @@ public class FindPeopleFragment extends Fragment {
 		UserInfo user = LoginHelper.userInfo;
 		displayIcon(user.getPicUrl(), iconSelf);
 
+		final HoloCircularProgressBar mHoloCircularProgressBar = (HoloCircularProgressBar) rootView
+				.findViewById(R.id.holoCircularProgressBar1);
+		mHoloCircularProgressBar.setProgress(0f);
+		mHoloCircularProgressBar.setProgressBackgroundColor(Color.BLUE);
+		iconSelf.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				if (mProgressBarAnimator != null) {
+					mProgressBarAnimator.cancel();
+				}
+				animate(mHoloCircularProgressBar, null, 0.5f, 1000);
+				mHoloCircularProgressBar.setMarkerProgress(1f);
+				mHoloCircularProgressBar.setProgressColor(Color.CYAN);
+			}
+		});
 		// get icon every 3 seconds
 		Thread fetchThread = new Thread(new Runnable() {
 			@Override
@@ -77,9 +102,10 @@ public class FindPeopleFragment extends Fragment {
 
 		return rootView;
 	}
-	
-	private void displayIcon(String url, ImageView imageView){
-		imageLoader.displayImage(url, imageView, options, PicUtil.animateListener);
+
+	private void displayIcon(String url, ImageView imageView) {
+		imageLoader.displayImage(url, imageView, options,
+				PicUtil.animateListener);
 	}
 
 	@SuppressLint("NewApi")
@@ -103,7 +129,7 @@ public class FindPeopleFragment extends Fragment {
 			GetRequest request = new GetRequest(requestURL);
 			String res = request.getContent();
 			ArrayList<Neighbor> neiList = new ArrayList<Neighbor>();
-			if (res != null){
+			if (res != null) {
 				neiList = JSONHelper.getNeighbor(res);
 			}
 			return neiList;
@@ -116,14 +142,14 @@ public class FindPeopleFragment extends Fragment {
 			iconList[0] = (ImageView) root.findViewById(R.id.contact1);
 			iconList[1] = (ImageView) root.findViewById(R.id.contact2);
 			iconList[2] = (ImageView) root.findViewById(R.id.contact3);
-			for (int i = 0; i < 3; i++){
-				if (i < neiList.size()){
+			for (int i = 0; i < 3; i++) {
+				if (i < neiList.size()) {
 					Neighbor nei = neiList.get(i);
 					iconList[i].setVisibility(View.VISIBLE);
 					displayIcon(nei.picURL, iconList[i]);
 				}
 			}
-			for (int i = neiList.size(); i < 3; i++){
+			for (int i = neiList.size(); i < 3; i++) {
 				iconList[i].setVisibility(View.GONE);
 			}
 		}
@@ -149,7 +175,7 @@ public class FindPeopleFragment extends Fragment {
 		}
 
 		// return location;
-		return new double[]{0,0};
+		return new double[] { 0, 0 };
 	}
 
 	@Override
@@ -157,4 +183,47 @@ public class FindPeopleFragment extends Fragment {
 		super.onDestroy();
 		finish = true;
 	}
+
+	private void animate(final HoloCircularProgressBar progressBar,
+			final AnimatorListener listener, final float progress,
+			final int duration) {
+
+		mProgressBarAnimator = ObjectAnimator.ofFloat(progressBar, "progress",
+				progress);
+		mProgressBarAnimator.setDuration(duration);
+
+		mProgressBarAnimator.addListener(new AnimatorListener() {
+
+			@Override
+			public void onAnimationCancel(final Animator animation) {
+			}
+
+			@Override
+			public void onAnimationEnd(final Animator animation) {
+				progressBar.setProgress(progress);
+			}
+
+			@Override
+			public void onAnimationRepeat(final Animator animation) {
+			}
+
+			@Override
+			public void onAnimationStart(final Animator animation) {
+			}
+		});
+		if (listener != null) {
+			mProgressBarAnimator.addListener(listener);
+		}
+		mProgressBarAnimator.reverse();
+		mProgressBarAnimator.addUpdateListener(new AnimatorUpdateListener() {
+
+			@Override
+			public void onAnimationUpdate(final ValueAnimator animation) {
+				progressBar.setProgress((Float) animation.getAnimatedValue());
+			}
+		});
+		progressBar.setMarkerProgress(progress);
+		mProgressBarAnimator.start();
+	}
+
 }

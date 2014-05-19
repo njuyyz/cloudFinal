@@ -73,20 +73,20 @@ public class ProfileFragment extends Fragment {
 		TextView emailTV = (TextView) getActivity().findViewById(R.id.email);
 		emailTV.setText(profile.getEducationList()[0]);
 
-		ImageButton bt = (ImageButton) getActivity().findViewById(
-				R.id.change_bg);
-		bt.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				Intent changebgIntent = new Intent(getActivity(),
-						GridViewActivity.class);
-
-				startActivityForResult(changebgIntent, 2);
-			}
-
-		});
+//		ImageButton bt = (ImageButton) getActivity().findViewById(
+//				R.id.change_bg);
+//		bt.setOnClickListener(new OnClickListener() {
+//
+//			@Override
+//			public void onClick(View v) {
+//				// TODO Auto-generated method stub
+//				Intent changebgIntent = new Intent(getActivity(),
+//						GridViewActivity.class);
+//
+//				startActivityForResult(changebgIntent, 2);
+//			}
+//
+//		});
 
 		ImageView thumbNailIV = (ImageView) getActivity().findViewById(
 				R.id.thumbnail);
@@ -120,6 +120,7 @@ public class ProfileFragment extends Fragment {
 			
 			RelativeLayout namecard = (RelativeLayout)view.findViewById(R.id.nameLayout);
 
+			Log.i("namecard","namecard");
 			namecard.setOnClickListener(new OnClickListener() {
 
 				@Override

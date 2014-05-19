@@ -185,40 +185,47 @@ public class ProfileFragment extends Fragment {
 				.findViewById(R.id.videoLayout);
 		LayoutInflater videoInflater = (LayoutInflater) getActivity()
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		RelativeLayout.LayoutParams params2 = new RelativeLayout.LayoutParams(
-				LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
+		LinearLayout.LayoutParams params2 = new LinearLayout.LayoutParams(
+				LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
 
+		
+		
+		videoLayout.addView(videoInflater.inflate(R.layout.record_button,
+				videoLayout, false), params2);
+
+		// add action listener
+		ImageButton recordBt = (ImageButton) getActivity().findViewById(
+				R.id.record);
+		recordBt.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Log.i("google", "video");
+
+				ContentValues values = new ContentValues();
+				values.put(MediaStore.Images.Media.TITLE,
+						LoginHelper.userInfo.getId());
+				Uri mImageUri = getActivity().getContentResolver().insert(
+						MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+						values);
+
+				Intent takeVideoIntent = new Intent(
+						MediaStore.ACTION_VIDEO_CAPTURE);
+				takeVideoIntent
+						.putExtra(MediaStore.EXTRA_OUTPUT, mImageUri);
+				startActivityForResult(takeVideoIntent, 1);
+
+			}
+
+		});
+
+		
+		
+		
+		
 		if (LoginHelper.userInfo.getVideoUrl() == null
 				|| LoginHelper.userInfo.getVideoUrl().equals("null")) {
-			videoLayout.addView(videoInflater.inflate(R.layout.record_button,
-					videoLayout, false), params2);
-
-			// add action listener
-			ImageButton recordBt = (ImageButton) getActivity().findViewById(
-					R.id.record);
-			recordBt.setOnClickListener(new OnClickListener() {
-
-				@Override
-				public void onClick(View v) {
-					// TODO Auto-generated method stub
-					Log.i("google", "video");
-
-					ContentValues values = new ContentValues();
-					values.put(MediaStore.Images.Media.TITLE,
-							LoginHelper.userInfo.getId());
-					Uri mImageUri = getActivity().getContentResolver().insert(
-							MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
-							values);
-
-					Intent takeVideoIntent = new Intent(
-							MediaStore.ACTION_VIDEO_CAPTURE);
-					takeVideoIntent
-							.putExtra(MediaStore.EXTRA_OUTPUT, mImageUri);
-					startActivityForResult(takeVideoIntent, 1);
-
-				}
-
-			});
 
 		} else {
 			videoLayout.addView(

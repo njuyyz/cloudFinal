@@ -9,27 +9,24 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:orientation="horizontal" >
+        android:orientation="vertical" >
 
         <TextView
             android:id="@+id/summary_title"
             android:singleLine="true"
             android:layout_height="wrap_content"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_marginLeft="10dp"
-            android:layout_weight="1"
             android:text="Summary"
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <TextView
             android:id="@+id/summary"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="40dp"
             android:layout_marginRight="40dp"
-            android:layout_weight="4"
-            android:text="TextView"
-            android:textSize="20sp" />
+            android:text="TextView" />
 
     </LinearLayout>
 
@@ -37,27 +34,24 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:orientation="horizontal" >
+        android:orientation="vertical" >
 
         <TextView
             android:singleLine="true"
             android:id="@+id/EducationTitle"
             android:layout_height="wrap_content"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_marginLeft="10dp"
-            android:layout_weight="1"
             android:text="Educations"
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <TextView
             android:id="@+id/Educations"
-            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
+            android:layout_width="match_parent"
+            android:layout_marginLeft="40dp"
             android:layout_marginRight="40dp"
-            android:layout_weight="4"
-            android:text="TextView"
-            android:textSize="20sp" />
+            android:text="TextView"/>
 
     </LinearLayout>
 

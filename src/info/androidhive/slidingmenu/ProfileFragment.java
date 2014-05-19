@@ -172,7 +172,7 @@ public class ProfileFragment extends Fragment {
 
 			});
 		} catch (Exception e) {
-			Log.i("google", e.toString());
+			Log.i("layout", e.toString());
 			// handle it
 		}
 
@@ -231,7 +231,9 @@ public class ProfileFragment extends Fragment {
 			Log.i("google", LoginHelper.userInfo.getVideoUrl());
 			// videoView.setMediaController(new MediaController(this));
 			videoView.requestFocus();
-			videoView.setMediaController(new MediaController(getActivity()));
+			MediaController mc = new MediaController(getActivity());
+			mc.setAnchorView(getActivity().findViewById(R.id.videoLayout));
+			videoView.setMediaController(mc);
 			// videoView.start();
 		}
 

@@ -1,93 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#d0d0d0"
-    android:orientation="vertical" >
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
 
-    <ScrollView
+    <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent" >
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
 
-        <RelativeLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content" >
+        <LinearLayout
+            android:id="@+id/nameLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/picture_frame"
+            android:orientation="vertical" >
 
-            <RelativeLayout
-                android:id="@+id/nameLayout"
+            <LinearLayout
+                android:id="@+id/namecard_bgcolor"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:background="@drawable/picture_frame"
-                android:orientation="vertical" >
+                android:baselineAligned="false"
+                android:background="#0074d9"
+                android:orientation="horizontal" >
 
-                <RelativeLayout
-                    android:id="@+id/namecard_bgcolor"
-                    android:layout_width="match_parent"
+                <LinearLayout
+                    android:layout_marginTop="40dp"
                     android:layout_height="wrap_content"
-                    android:animateLayoutChanges="false"
-                    android:background="#0074d9"
+                    android:layout_width="wrap_content"
+                    android:layout_marginBottom="40dp"
+                    android:layout_weight="1" >
+
+                    <ImageView
+                        android:id="@+id/thumbnail"
+                        android:layout_marginLeft="30dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_photos" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_marginTop="40dp"
+                    android:layout_marginBottom="40dp"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:layout_weight="4"
                     android:orientation="vertical" >
 
-                    <RelativeLayout
-                        android:id="@+id/test"
-                        android:gravity="center"
-                        android:layout_marginTop="60dp"
-                        android:layout_centerInParent="true"
-                        android:layout_width="match_parent"
+                    <TextView
+                        android:id="@+id/basic_name"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:animateLayoutChanges="false"
-                        android:orientation="vertical" >
+                        android:text="Large Text"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:textSize="30sp" />
 
-                        <ImageView
-                            android:id="@+id/thumbnail"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentLeft="true"
-                            android:layout_alignParentTop="true"
-                            android:src="@drawable/ic_photos" />
+                    <TextView
+                        android:id="@+id/phone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="TextView"
+                        android:textSize="20sp" />
 
-                        <TextView
-                            android:id="@+id/basic_name"
-                            android:layout_width="300dp"
-                            android:layout_height="wrap_content"
-                            android:layout_alignTop="@id/thumbnail"
-                            android:layout_marginLeft="30dp"
-                            android:layout_toRightOf="@id/thumbnail"
-                            android:text="Large Text"
-                            android:textAppearance="?android:attr/textAppearanceLarge"
-                            android:textSize="30sp" />
+                    <TextView
+                        android:id="@+id/email"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="TextView"
+                        android:textSize="20sp" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
 
-                        <TextView
-                            android:id="@+id/phone"
-                            android:layout_width="300dp"
-                            android:layout_height="wrap_content"
-                            android:layout_alignLeft="@id/basic_name"
-                            android:layout_below="@id/basic_name"
-                            android:text="TextView"
-                            android:textSize="20sp" />
+        <LinearLayout
+            android:id="@+id/videoLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/picture_frame"
+            android:orientation="horizontal" >
+        </LinearLayout>
+    </LinearLayout>
 
-                        <TextView
-                            android:id="@+id/email"
-                            android:layout_width="300dp"
-                            android:layout_height="wrap_content"
-                            android:layout_alignLeft="@id/phone"
-                            android:layout_below="@id/phone"
-                            android:text="TextView"
-                            android:textSize="20sp" />
-                    </RelativeLayout>
-                </RelativeLayout>
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/videoLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/nameLayout"
-                android:background="@drawable/picture_frame"
-                android:orientation="horizontal" >
-            </RelativeLayout>
-        </RelativeLayout>
-    </ScrollView>
-
-</RelativeLayout>
+</ScrollView>

@@ -16,9 +16,9 @@ public class Constant {
 			+ "/setstyle?uid=%s&styleid=%s";
 	public final static String RADAR_REQUEST = SERVER_ADDRESS + "/radar?uid=%s&latitude=%f&longitude=%f";
 
-	public final static int[] styles = { R.drawable.white, R.drawable.silver, R.drawable.gray,
-		R.drawable.blue, R.drawable.aqua, R.drawable.teal, R.drawable.olive, R.drawable.green, R.drawable.lime,
-		R.drawable.yellow };
+	public final static String[] styles = { "#FFFFFF", "#DDDDDD", "#AAAAAA",
+		"#0074D9", "#7FDBFF", "#39CCCC", "#3D9970", "#2ECC40", "#01FF70",
+		"#FFDC00" };
 	// 0: WHITE #FFFFFF
 	// 1: SILVER #DDDDDD
 	// 2: GRAY #AAAAAA

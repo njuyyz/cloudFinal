@@ -12,9 +12,11 @@ import util.PicUtil;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -74,10 +76,11 @@ public class CommunityFragment extends Fragment {
 				UserInfo userInfo = list.get(position);
 				
 				DetailFragment fragment = new DetailFragment();
-				fragment.userInfo = userInfo;
-				FragmentManager fragmentManager = getFragmentManager();
-				fragmentManager.beginTransaction()
-						.replace(R.id.frame_container, fragment).addToBackStack( null ).commit();
+				DetailFragment.userInfo = userInfo;
+				FragmentTransaction fragmentManager = getFragmentManager().beginTransaction();
+				fragmentManager.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right);
+
+				fragmentManager.replace(R.id.frame_container, fragment).addToBackStack( null ).commit();
 
 				
 			}
@@ -126,7 +129,7 @@ public class CommunityFragment extends Fragment {
 						parent, false);
 
 				RelativeLayout rl = (RelativeLayout) view.findViewById(R.id.contact_namecard_bgcolor);
-				rl.setBackgroundResource(Constant.styles[Integer.parseInt(currentNewsFeed.getStyleUrl())]);
+				rl.setBackgroundColor(Color.parseColor(Constant.styles[Integer.parseInt(currentNewsFeed.getStyleUrl())]));
 				holder = this.new ViewHolder();
 				UserInfo profile = getItem(position);
 				String name = profile.getFirstName() + " "

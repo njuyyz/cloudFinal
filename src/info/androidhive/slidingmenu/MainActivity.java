@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.TypedArray;
 import android.os.Bundle;
@@ -146,6 +147,12 @@ public class MainActivity extends Activity {
 		// Handle action bar actions click
 		switch (item.getItemId()) {
 		case R.id.action_settings:
+
+			Intent changebgIntent = new Intent(this,
+					GridViewActivity.class);
+			FragmentManager fragmentManager = getFragmentManager();
+			Fragment currentFragment = fragmentManager.findFragmentById(R.id.frame_container);
+			currentFragment.startActivityForResult(changebgIntent, 2);
 			return true;
 		default:
 			return super.onOptionsItemSelected(item);
@@ -179,9 +186,9 @@ public class MainActivity extends Activity {
 		case 2:
 			fragment = new CommunityFragment();
 			break;
-		// case 3:
-		// fragment = new CommunityFragment();
-		// break;
+		case 3:
+			fragment = new TimeLineFragment();
+			break;
 		// case 4:
 		// fragment = new PagesFragment();
 		// break;

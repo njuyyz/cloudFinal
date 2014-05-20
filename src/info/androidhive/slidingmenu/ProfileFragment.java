@@ -162,16 +162,17 @@ public class ProfileFragment extends Fragment {
 			}
 
 		});
-		
+
 		// add action listener
 		LinearLayout recordBt = (LinearLayout) getActivity().findViewById(
 				R.id.record);
-		
+
 		RotateAnimation r; // = new RotateAnimation(ROTATE_FROM, ROTATE_TO);
-		  r = new RotateAnimation(0, 360, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
-		  r.setDuration((long) 1000);
-		  r.setRepeatCount(Animation.INFINITE);
-		  recordBt.startAnimation(r);
+		r = new RotateAnimation(0, 360, Animation.RELATIVE_TO_SELF, 0.5f,
+				Animation.RELATIVE_TO_SELF, 0.5f);
+		r.setDuration((long) 1000);
+		r.setRepeatCount(Animation.INFINITE);
+		recordBt.startAnimation(r);
 
 		Log.i("onclick", "listener");
 		recordBt.setOnClickListener(new OnClickListener() {
@@ -231,7 +232,7 @@ public class ProfileFragment extends Fragment {
 
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
-		if (requestCode == 1) {
+		if (requestCode == 1 && resultCode == Activity.RESULT_OK) {
 
 			Uri videoUri = data.getData();
 

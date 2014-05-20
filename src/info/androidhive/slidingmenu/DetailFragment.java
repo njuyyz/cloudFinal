@@ -14,6 +14,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -43,6 +44,9 @@ public class DetailFragment extends Fragment {
 
 	public void onStart() {
 		super.onStart();
+		Typeface face=Typeface.createFromAsset(getActivity().getAssets(),
+                "fonts/kozuka_light.otf");
+
 		LinearLayout detailLayout = (LinearLayout) getActivity().findViewById(R.id.detailLayout);
 		detailLayout.setBackgroundColor(Color.parseColor(Constant.styles[Integer.parseInt(userInfo.getStyleUrl())]));
 		String name = userInfo.getFirstName() + " " + userInfo.getLastName()
@@ -50,13 +54,16 @@ public class DetailFragment extends Fragment {
 		TextView nameTV = (TextView) getActivity().findViewById(
 				R.id.contact_basic_name);
 		nameTV.setText(name);
+		nameTV.setTypeface(face);
 		TextView phoneTV = (TextView) getActivity().findViewById(
 				R.id.contact_phone);
 		String phone = userInfo.getPhoneList()[0];
 		phoneTV.setText(phone);
+		phoneTV.setTypeface(face);
 		TextView emailTV = (TextView) getActivity().findViewById(
 				R.id.contact_email);
 		emailTV.setText(userInfo.getEducationList()[0]);
+		emailTV.setTypeface(face);
 		ImageView thumbNailIV = (ImageView) getActivity().findViewById(
 				R.id.contact_thumbnail);
 		try {
@@ -87,6 +94,7 @@ public class DetailFragment extends Fragment {
 			TextView summaryTV = (TextView) getActivity().findViewById(
 					R.id.contact_summary);
 			summaryTV.setText(userInfo.getSummary());
+			summaryTV.setTypeface(face);
 
 			TextView EducationTV = (TextView) getActivity().findViewById(
 					R.id.contact_Educations);
@@ -96,6 +104,7 @@ public class DetailFragment extends Fragment {
 				sb.append(s + "\n");
 			}
 			EducationTV.setText(sb.toString());
+			EducationTV.setTypeface(face);
 			
 			insertVideo();
 

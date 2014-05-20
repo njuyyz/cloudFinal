@@ -155,7 +155,7 @@ public class FindPeopleFragment extends Fragment {
 						// previous 2 or 1
 						NeigborItem item = neiMap.get(iconList[i]);
 						if (item != null
-								&& (item.relation == 2 || item.relation == 1)) {
+								&& (item.relation == 1)) {
 							spin(iconList[i]);
 						}
 					}

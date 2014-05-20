@@ -9,6 +9,7 @@ import java.net.URLConnection;
 
 import model.UserInfo;
 import android.app.Fragment;
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -17,7 +18,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.MediaController;
 import android.widget.TextView;
 import android.widget.VideoView;
@@ -72,7 +76,7 @@ public class DetailFragment extends Fragment {
 			};
 			t.start();
 			t.join();
-			insertVideo();
+			
 
 			thumbNailIV.setImageBitmap(userInfo.getThumbNail());
 
@@ -88,6 +92,8 @@ public class DetailFragment extends Fragment {
 				sb.append(s + "\n");
 			}
 			EducationTV.setText(sb.toString());
+			
+			insertVideo();
 
 		} catch (Exception e) {
 			Log.i("google", e.toString());
@@ -97,20 +103,37 @@ public class DetailFragment extends Fragment {
 
 	public void insertVideo() {
 
+		LinearLayout videoLayout = (LinearLayout) getActivity().findViewById(
+				R.id.videoLayout2);
+		LayoutInflater videoInflater = (LayoutInflater) getActivity()
+				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		LinearLayout.LayoutParams params2 = new LinearLayout.LayoutParams(
+				LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+		
 		if (userInfo.getVideoUrl() == null
 				|| LoginHelper.userInfo.getVideoUrl().equals("null")) {
-			VideoView vv = (VideoView) getActivity().findViewById(R.id.contact_video);
-			vv.setVisibility(View.GONE);
+//			VideoView vv = (VideoView) getActivity().findViewById(R.id.contact_video);
+//			vv.setVisibility(View.GONE);
 			return;
 
 		} else {
+			// no....
+			videoLayout.addView(
+					videoInflater.inflate(R.layout.video, videoLayout, false),
+					params2);
+			
 			VideoView videoView = (VideoView) getActivity().findViewById(
-					R.id.contact_video);
+					R.id.video);
 			videoView
 					.setVideoURI(Uri.parse(userInfo.getVideoUrl()));
 			Log.i("google", userInfo.getVideoUrl());
-			videoView.requestFocus();
-			videoView.setMediaController(new MediaController(getActivity()));
+//			videoView.requestFocus();
+//			videoView.setMediaController(new MediaController(getActivity()));
+//			MediaController mc = new MyMediaController(getActivity(),
+//					(FrameLayout) getActivity().findViewById(
+//							R.id.controllerAnchor));
+//			mc.setAnchorView(getActivity().findViewById(R.id.controllerAnchor));
+//			videoView.setMediaController(mc);	
 		}
 
 	}

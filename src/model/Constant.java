@@ -1,6 +1,5 @@
 package model;
 
-import info.androidhive.slidingmenu.R;
 
 public class Constant {
 
@@ -15,7 +14,8 @@ public class Constant {
 	public final static String CHANGE_STYLE = SERVER_ADDRESS
 			+ "/setstyle?uid=%s&styleid=%s";
 	public final static String RADAR_REQUEST = SERVER_ADDRESS + "/radar?uid=%s&latitude=%f&longitude=%f";
-
+	public final static String ADD_REQUEST = SERVER_ADDRESS + "/add?from=%s&to=%s";
+	
 	public final static String[] styles = { "#FFFFFF", "#DDDDDD", "#AAAAAA",
 		"#0074D9", "#7FDBFF", "#39CCCC", "#3D9970", "#2ECC40", "#01FF70",
 		"#FFDC00" };

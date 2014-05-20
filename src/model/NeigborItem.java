@@ -5,10 +5,10 @@ import de.passsy.holocircularprogressbar.HoloCircularProgressBar;
 public class NeigborItem {
 	public HoloCircularProgressBar progressBar;
 	public int relation;
-	public int uId;
+	public String uId;
 
 	public NeigborItem(HoloCircularProgressBar progressBar, int relation,
-			int uId) {
+			String uId) {
 		super();
 		this.progressBar = progressBar;
 		this.relation = relation;

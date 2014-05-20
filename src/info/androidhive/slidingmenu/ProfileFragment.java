@@ -28,6 +28,8 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
+import android.view.animation.Animation;
+import android.view.animation.RotateAnimation;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -164,6 +166,12 @@ public class ProfileFragment extends Fragment {
 		// add action listener
 		LinearLayout recordBt = (LinearLayout) getActivity().findViewById(
 				R.id.record);
+		
+		RotateAnimation r; // = new RotateAnimation(ROTATE_FROM, ROTATE_TO);
+		  r = new RotateAnimation(0, 360, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+		  r.setDuration((long) 1000);
+		  r.setRepeatCount(Animation.INFINITE);
+		  recordBt.startAnimation(r);
 
 		Log.i("onclick", "listener");
 		recordBt.setOnClickListener(new OnClickListener() {

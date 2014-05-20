@@ -97,16 +97,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#000000"
-                android:orientation="vertical" >
+                android:orientation="horizontal" >
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
 
                 <LinearLayout
                     android:id="@+id/record"
-                    android:orientation="vertical"
-                    android:layout_marginTop="5dp"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
-                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="5dp"
                     android:background="@drawable/video_button"
+                    android:orientation="vertical"
                     android:scaleType="fitXY" >
                 </LinearLayout>
             </LinearLayout>

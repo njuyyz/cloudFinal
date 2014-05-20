@@ -100,89 +100,92 @@ public class ProfileFragment extends Fragment {
 			};
 			t.start();
 			t.join();
-			thumbNailIV.setImageBitmap(profile.getThumbNail());
-
-			// insert video
-			if (profile.getVideoUrl() != null
-					&& !profile.getVideoUrl().equals("null"))
-				insertVideo();
-
-			LinearLayout namecard = (LinearLayout) view
-					.findViewById(R.id.nameLayout);
-			namecard.setOnClickListener(new OnClickListener() {
-
-				@Override
-				public void onClick(View v) {
-
-					View detailView = view
-							.findViewById(R.id.detail_namecard_bgcolor);
-					if (detailView == null) {
-						LinearLayout mynewlayout = (LinearLayout) getActivity()
-								.findViewById(R.id.nameLayout);
-						LayoutInflater layoutInflater = (LayoutInflater) getActivity()
-								.getSystemService(
-										Context.LAYOUT_INFLATER_SERVICE);
-
-						// insert detail into the view
-						LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-								LayoutParams.MATCH_PARENT,
-								LayoutParams.WRAP_CONTENT);
-						mynewlayout.addView(layoutInflater.inflate(
-								R.layout.namecard_detail, mynewlayout, false),
-								params);
-						LinearLayout rl2 = (LinearLayout) getActivity()
-								.findViewById(R.id.detail_namecard_bgcolor);
-						rl2.setBackgroundColor(Color
-								.parseColor(Constant.styles[Integer
-										.parseInt(profile.getStyleUrl())]));
-						TextView summaryTV = (TextView) getActivity()
-								.findViewById(R.id.summary);
-						summaryTV.setText(LoginHelper.userInfo.getSummary());
-
-						TextView EducationTV = (TextView) getActivity()
-								.findViewById(R.id.Educations);
-						String[] educationList = LoginHelper.userInfo
-								.getEducationList();
-						StringBuilder sb = new StringBuilder();
-						for (String s : educationList) {
-							sb.append(s + "\n");
-						}
-						EducationTV.setText(sb.toString());
-					} else {
-						((LinearLayout) detailView.getParent())
-								.removeView(detailView);
-					}
-
-				}
-
-			});
-			// add action listener
-			ImageButton recordBt = (ImageButton) getActivity().findViewById(
-					R.id.record);
-			recordBt.setOnClickListener(new OnClickListener() {
-
-				@Override
-				public void onClick(View v) {
-
-					ContentValues values = new ContentValues();
-					values.put(MediaStore.Images.Media.TITLE,
-							LoginHelper.userInfo.getId());
-					Uri mImageUri = getActivity().getContentResolver().insert(
-							MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
-							values);
-
-					Intent takeVideoIntent = new Intent(
-							MediaStore.ACTION_VIDEO_CAPTURE);
-					takeVideoIntent
-							.putExtra(MediaStore.EXTRA_OUTPUT, mImageUri);
-					startActivityForResult(takeVideoIntent, 1);
-
-				}
-
-			});
 
 		} catch (Exception e) {
+			Log.i("profileFragment", e.toString());
 		}
+		thumbNailIV.setImageBitmap(profile.getThumbNail());
+
+		// insert video
+		if (profile.getVideoUrl() != null
+				&& !profile.getVideoUrl().equals("null")) {
+			insertVideo();
+		}
+
+		LinearLayout namecard = (LinearLayout) view
+				.findViewById(R.id.nameLayout);
+		namecard.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+
+				View detailView = view
+						.findViewById(R.id.detail_namecard_bgcolor);
+				if (detailView == null) {
+					LinearLayout mynewlayout = (LinearLayout) getActivity()
+							.findViewById(R.id.nameLayout);
+					LayoutInflater layoutInflater = (LayoutInflater) getActivity()
+							.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+					// insert detail into the view
+					LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+							LayoutParams.MATCH_PARENT,
+							LayoutParams.WRAP_CONTENT);
+					mynewlayout.addView(layoutInflater.inflate(
+							R.layout.namecard_detail, mynewlayout, false),
+							params);
+					LinearLayout rl2 = (LinearLayout) getActivity()
+							.findViewById(R.id.detail_namecard_bgcolor);
+					rl2.setBackgroundColor(Color
+							.parseColor(Constant.styles[Integer
+									.parseInt(profile.getStyleUrl())]));
+					TextView summaryTV = (TextView) getActivity().findViewById(
+							R.id.summary);
+					summaryTV.setText(LoginHelper.userInfo.getSummary());
+
+					TextView EducationTV = (TextView) getActivity()
+							.findViewById(R.id.Educations);
+					String[] educationList = LoginHelper.userInfo
+							.getEducationList();
+					StringBuilder sb = new StringBuilder();
+					for (String s : educationList) {
+						sb.append(s + "\n");
+					}
+					EducationTV.setText(sb.toString());
+				} else {
+					((LinearLayout) detailView.getParent())
+							.removeView(detailView);
+				}
+
+			}
+
+		});
+		
+		// add action listener
+		LinearLayout recordBt = (LinearLayout) getActivity().findViewById(
+				R.id.record);
+
+		Log.i("onclick", "listener");
+		recordBt.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+
+				ContentValues values = new ContentValues();
+				values.put(MediaStore.Images.Media.TITLE,
+						LoginHelper.userInfo.getId());
+				Uri mImageUri = getActivity().getContentResolver().insert(
+						MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
+
+				Intent takeVideoIntent = new Intent(
+						MediaStore.ACTION_VIDEO_CAPTURE);
+				takeVideoIntent.putExtra(MediaStore.EXTRA_OUTPUT, mImageUri);
+				Log.i("start", "video");
+				startActivityForResult(takeVideoIntent, 1);
+
+			}
+
+		});
 
 	}
 
@@ -208,7 +211,7 @@ public class ProfileFragment extends Fragment {
 					R.id.video);
 			videoView
 					.setVideoURI(Uri.parse(LoginHelper.userInfo.getVideoUrl()));
-//			videoView.requestFocus();
+			// videoView.requestFocus();
 			MediaController mc = new MyMediaController(getActivity(),
 					(FrameLayout) getActivity().findViewById(
 							R.id.controllerAnchor));

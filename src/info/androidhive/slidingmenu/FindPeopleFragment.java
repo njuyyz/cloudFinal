@@ -156,12 +156,7 @@ public class FindPeopleFragment extends Fragment {
 						NeigborItem item = neiMap.get(iconList[i]);
 						if (item != null
 								&& (item.relation == 2 || item.relation == 1)) {
-							RotateAnimation r = new RotateAnimation(0f, 360f,
-									Animation.RELATIVE_TO_SELF, 0.5f,
-									Animation.RELATIVE_TO_SELF, 0.5f);
-							r.setDuration((long) 1500);
-							r.setRepeatCount(0);
-							iconList[i].startAnimation(r);
+							spin(iconList[i]);
 						}
 					}
 					iconList[i].setOnClickListener(new NeiClickListener());
@@ -279,7 +274,17 @@ public class FindPeopleFragment extends Fragment {
 				animate(item.progressBar, null, 1.0f, 1000);
 				// send request to complete
 				new AddContactTask(uId, item.uId).execute();
+				spin(imageView);
 			}
 		}
+	}
+	
+	private void spin(ImageView imageView){
+		RotateAnimation r = new RotateAnimation(0f, 360f,
+				Animation.RELATIVE_TO_SELF, 0.5f,
+				Animation.RELATIVE_TO_SELF, 0.5f);
+		r.setDuration((long) 1500);
+		r.setRepeatCount(0);
+		imageView.startAnimation(r);
 	}
 }

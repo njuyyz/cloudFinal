@@ -16,9 +16,9 @@ public class Constant {
 	public final static String RADAR_REQUEST = SERVER_ADDRESS + "/radar?uid=%s&latitude=%f&longitude=%f";
 	public final static String ADD_REQUEST = SERVER_ADDRESS + "/add?from=%s&to=%s";
 	
-	public final static String[] styles = { "#FFFFFF", "#FFFFFB", "#FCFAF2",
-		"#BDC0BA", "#B28FCE", "#9B90C2", "#3D9970", "#7B90D2", "#7DB9DE",
-		"#81C7D4", "#66BAB7", "#86A697", "#ABD8B9", "#91B493", "#B5CAA0",
+	public final static String[] styles = {  "#FCFAF2",
+		"#BDC0BA", "#B28FCE", "#9B90C2", "#3D9970","#FFFFFF", "#7B90D2", "#7DB9DE",
+		"#81C7D4", "#66BAB7", "#86A697","#FFFFFB", "#ABD8B9", "#91B493", "#B5CAA0",
 		"#BEC23F", "#D9CD90", "#EEA9A9", "#FEDFE1", "#DC9FD4"};
 	// 0: WHITE #FFFFFF
 	// 1: SILVER #DDDDDD

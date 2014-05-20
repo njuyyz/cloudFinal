@@ -93,8 +93,13 @@ public class DetailFragment extends Fragment {
 
 			TextView summaryTV = (TextView) getActivity().findViewById(
 					R.id.contact_summary);
-			summaryTV.setText(userInfo.getSummary());
-			summaryTV.setTypeface(face);
+			if(userInfo.getSummary() == null|| userInfo.getSummary().equals("null")){
+				View summary = getActivity().findViewById(R.id.summary);
+				detailLayout.removeView(summary);
+			}else{
+				summaryTV.setText(userInfo.getSummary());
+				summaryTV.setTypeface(face);
+			}
 
 			TextView EducationTV = (TextView) getActivity().findViewById(
 					R.id.contact_Educations);
@@ -103,8 +108,14 @@ public class DetailFragment extends Fragment {
 			for (String s : educationList) {
 				sb.append(s + "\n");
 			}
-			EducationTV.setText(sb.toString());
-			EducationTV.setTypeface(face);
+			String educationString =sb.toString();
+			if(educationString == "" ){
+				View education = getActivity().findViewById(R.id.education);
+				detailLayout.removeView(education);
+			}else{
+				EducationTV.setText(educationString);
+				EducationTV.setTypeface(face);
+			}
 			
 			insertVideo();
 

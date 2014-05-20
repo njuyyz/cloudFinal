@@ -9,6 +9,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.os.Build;
 import helper.ChangeStyleHelper;
 import helper.LoginHelper;
@@ -62,7 +64,7 @@ public class GridViewActivity extends Activity {
 					Toast.LENGTH_SHORT).show();
 
 			String idString = LoginHelper.userInfo.getId();
-			int styleString = position % 10;
+			int styleString = position % Constant.styles.length;
 
 			// this str[] is for updating the database
 			ChangeStyleHelper csh = new ChangeStyleHelper(v.getContext());
@@ -85,6 +87,12 @@ public class GridViewActivity extends Activity {
 							android.view.WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
 		}
 		super.onCreate(savedInstanceState);
+		
+		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+
+	    //Remove notification bar
+	    this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
 		setContentView(R.layout.activity_gridview);
 
 		GridView gridView = (GridView) findViewById(R.id.activity_gridview_gv);
@@ -140,7 +148,7 @@ public class GridViewActivity extends Activity {
 				// imageView.setLayoutParams(parms);
 			}
 
-			int colorId = getItem(position) % 10;
+			int colorId = getItem(position) % Constant.styles.length;
 
 			// set the background Color
 			imageView.setBackgroundColor(Color

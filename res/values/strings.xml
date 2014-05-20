@@ -11,7 +11,7 @@
     <string-array name="nav_drawer_items">
         <item>Profile</item>
         <item>Radar</item>
-        <item>Photos</item>
+        <item>Contacts</item>
         <item>Contacts</item>
         <item>Log Out</item>
         <item>What\'s Hot</item>

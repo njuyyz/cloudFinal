@@ -18,7 +18,7 @@
                 android:id="@+id/detailLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#0074d9"
+                android:paddingBottom="40dp"
                 android:orientation="vertical" >
 
                 <LinearLayout
@@ -35,10 +35,9 @@
 
                         <ImageView
                             android:id="@+id/contact_thumbnail"
-                            android:layout_width="60dp"
-                            android:layout_height="60dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal"
-                            android:scaleType="fitXY"
                             android:src="@drawable/ic_photos" />
                     </LinearLayout>
 
@@ -76,7 +75,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:baselineAligned="false"
-                    android:orientation="horizontal" >
+                    android:orientation="vertical" >
 
                     <TextView
                         android:id="@+id/contact_EducationTitle"
@@ -90,7 +89,8 @@
                         android:id="@+id/contact_Educations"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginLeft="40dp"
                         android:text="TextView" />
                 </LinearLayout>
 
@@ -99,13 +99,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:baselineAligned="false"
-                    android:orientation="horizontal" >
+                    android:orientation="vertical" >
 
                     <TextView
                         android:id="@+id/contact_summary_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentLeft="true"
+                        android:layout_marginTop="30dp"
                         android:layout_marginLeft="20dp"
                         android:text="Summary"
                         android:textAppearance="?android:attr/textAppearanceLarge" />
@@ -114,7 +114,7 @@
                         android:id="@+id/contact_summary"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="34dp"
+                        android:layout_marginLeft="40dp"
                         android:text="TextView" />
                 </LinearLayout>
             </LinearLayout>
@@ -123,8 +123,6 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@+id/contact_Educations"
-            android:layout_centerHorizontal="true"
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="40dp"
             android:layout_marginTop="10dp"
@@ -143,7 +141,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="400dp"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginBottom="20dp"
+                    android:layout_marginBottom="80dp"
                     android:layout_marginTop="20dp"
                     android:orientation="vertical" >
                 </LinearLayout>

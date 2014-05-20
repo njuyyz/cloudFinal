@@ -12,7 +12,7 @@
         <item>Profile</item>
         <item>Radar</item>
         <item>Contacts</item>
-        <item>Contacts</item>
+        <item>TimeLine</item>
         <item>Log Out</item>
         <item>What\'s Hot</item>
     </string-array>
@@ -23,7 +23,7 @@
         <item>@drawable/ic_menu_home</item>
         <item>@drawable/ic_menu_invite</item>
         <item>@drawable/ic_menu_cc_am</item>
-        <item>@drawable/ic_logout</item>
+        <item>@drawable/ic_menu_mapmode</item><!--  change here -->
         <item>@drawable/ic_logout</item>
         <item>@drawable/ic_whats_hot</item>
     </array>

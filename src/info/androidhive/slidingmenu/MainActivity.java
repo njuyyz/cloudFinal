@@ -60,21 +60,24 @@ public class MainActivity extends Activity {
 		navDrawerItems = new ArrayList<NavDrawerItem>();
 
 		// adding nav drawer items to array
-		// Home
+		
+		// Profile
 		navDrawerItems.add(new NavDrawerItem(navMenuTitles[0], navMenuIcons
 				.getResourceId(0, -1)));
-		// Find People
+		// Rader
 		navDrawerItems.add(new NavDrawerItem(navMenuTitles[1], navMenuIcons
 				.getResourceId(1, -1)));
-		// Photos
-		// navDrawerItems.add(new NavDrawerItem(navMenuTitles[2],
-		// navMenuIcons.getResourceId(2, -1)));
-		// Communities, Will add a counter here
+		
+		// contact
+		 navDrawerItems.add(new NavDrawerItem(navMenuTitles[2],
+		 navMenuIcons.getResourceId(2, -1)));
+		 
+		// Time line
 		navDrawerItems.add(new NavDrawerItem(navMenuTitles[3], navMenuIcons
-				.getResourceId(2, -1)));
-		// Pages
+				.getResourceId(3, -1)));
+		// Logout
 		 navDrawerItems.add(new NavDrawerItem(navMenuTitles[4],
-		 navMenuIcons.getResourceId(3, -1)));
+		 navMenuIcons.getResourceId(4, -1)));
 		// What's hot, We will add a counter here
 		// navDrawerItems.add(new NavDrawerItem(navMenuTitles[5],
 		// navMenuIcons.getResourceId(5, -1), true, "50+"));
@@ -188,11 +191,11 @@ public class MainActivity extends Activity {
 			fragment = new CommunityFragment();
 			break;
 		case 3:
-			logOut();
+			fragment = new TimeLineFragment();
 			break;
-		// case 4:
-		// fragment = new PagesFragment();
-		// break;
+		case 4:
+			logOut();
+		break;
 		// case 5:
 		// fragment = new WhatsHotFragment();
 		// break;

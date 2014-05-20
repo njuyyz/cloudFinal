@@ -37,6 +37,18 @@ public class UserInfo {
 	private String styleUrl;
 
 	private Bitmap thumbNail;
+	
+	
+	private long realtime;
+	
+
+	public long getRealtime() {
+		return realtime;
+	}
+
+	public void setRealtime(long realtime) {
+		this.realtime = realtime;
+	}
 
 	public Bitmap getThumbNail() {
 		return thumbNail;
@@ -71,6 +83,8 @@ public class UserInfo {
 			styleUrl = "0";
 		}
 		id = (String) jsonObject.get("u_id");
+		
+		realtime = (Long) jsonObject.get("create_time");
 	}
 
 	@SuppressWarnings("unchecked")

@@ -3,6 +3,7 @@ package info.androidhive.slidingmenu;
 import info.androidhive.slidingmenu.adapter.NavDrawerListAdapter;
 import info.androidhive.slidingmenu.model.NavDrawerItem;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import android.app.Activity;
@@ -70,10 +71,10 @@ public class MainActivity extends Activity {
 		// navMenuIcons.getResourceId(2, -1)));
 		// Communities, Will add a counter here
 		navDrawerItems.add(new NavDrawerItem(navMenuTitles[3], navMenuIcons
-				.getResourceId(2, -1), true, "22"));
+				.getResourceId(2, -1)));
 		// Pages
-		// navDrawerItems.add(new NavDrawerItem(navMenuTitles[4],
-		// navMenuIcons.getResourceId(4, -1)));
+		 navDrawerItems.add(new NavDrawerItem(navMenuTitles[4],
+		 navMenuIcons.getResourceId(3, -1)));
 		// What's hot, We will add a counter here
 		// navDrawerItems.add(new NavDrawerItem(navMenuTitles[5],
 		// navMenuIcons.getResourceId(5, -1), true, "50+"));
@@ -187,7 +188,7 @@ public class MainActivity extends Activity {
 			fragment = new CommunityFragment();
 			break;
 		case 3:
-//			fragment = new TimeLineFragment();
+			logOut();
 			break;
 		// case 4:
 		// fragment = new PagesFragment();
@@ -239,6 +240,17 @@ public class MainActivity extends Activity {
 		super.onConfigurationChanged(newConfig);
 		// Pass any configuration change to the drawer toggls
 		mDrawerToggle.onConfigurationChanged(newConfig);
+	}
+	
+	
+	private void logOut(){
+		File idFile = new File(this.getFilesDir(), "id");
+		idFile.delete();
+		Intent intent = new Intent(this,LoginActivity.class);
+		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		startActivity(intent);
+		
+        finish();
 	}
 
 }

@@ -72,26 +72,34 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center_horizontal"
-            android:background="@drawable/picture_frame" 
-            android:orientation="vertical">
-            
-            <LinearLayout 
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center_horizontal"
-            android:orientation="vertical"
-            android:background="#000000">
+            android:background="@drawable/picture_frame"
+            android:orientation="vertical" >
 
             <LinearLayout
-                android:id="@+id/videoLayout"
-                android:layout_width="400dp"
-                android:layout_height="400dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginBottom="85dp"
-                android:layout_marginTop="20dp"
-                android:orientation="horizontal" >
+                android:background="#000000"
+                android:orientation="vertical" >
+
+                <ImageButton
+                    android:id="@+id/record"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:gravity="right"
+                    android:src="@drawable/ic_communities" />
+
+                <LinearLayout
+                    android:id="@+id/videoLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="400dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="90dp"
+                    android:layout_marginTop="20dp"
+                    android:orientation="vertical" >
+                </LinearLayout>
             </LinearLayout>
-        </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 

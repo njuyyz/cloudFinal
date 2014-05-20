@@ -54,7 +54,6 @@ public class ProfileFragment extends Fragment {
 		int styleId = Integer.parseInt(profile.getStyleUrl());
 		rl.setBackgroundColor(Color.parseColor(Constant.styles[styleId]));
 
-		
 		getActivity().getActionBar().show();
 		return view;
 	}
@@ -62,7 +61,10 @@ public class ProfileFragment extends Fragment {
 	@Override
 	public void onStart() {
 		super.onStart();
+
 		profile = LoginHelper.userInfo;
+
+		// initial information
 		String name = profile.getFirstName() + " " + profile.getLastName()
 				+ " ";
 		TextView nameTV = (TextView) getActivity()
@@ -74,21 +76,7 @@ public class ProfileFragment extends Fragment {
 		TextView emailTV = (TextView) getActivity().findViewById(R.id.email);
 		emailTV.setText(profile.getEducationList()[0]);
 
-//		ImageButton bt = (ImageButton) getActivity().findViewById(
-//				R.id.change_bg);
-//		bt.setOnClickListener(new OnClickListener() {
-//
-//			@Override
-//			public void onClick(View v) {
-//				// TODO Auto-generated method stub
-//				Intent changebgIntent = new Intent(getActivity(),
-//						GridViewActivity.class);
-//
-//				startActivityForResult(changebgIntent, 2);
-//			}
-//
-//		});
-
+		// init image
 		ImageView thumbNailIV = (ImageView) getActivity().findViewById(
 				R.id.thumbnail);
 		try {
@@ -112,26 +100,23 @@ public class ProfileFragment extends Fragment {
 			};
 			t.start();
 			t.join();
-
-			// LoginHelper.userInkfo.setVideoUrl("null");
-			// insert video
-			insertVideo();
-
 			thumbNailIV.setImageBitmap(profile.getThumbNail());
-			
-			LinearLayout namecard = (LinearLayout)view.findViewById(R.id.nameLayout);
 
-			Log.i("namecard","namecard");
+			// insert video
+			if (profile.getVideoUrl() != null
+					&& !profile.getVideoUrl().equals("null"))
+				insertVideo();
+
+			LinearLayout namecard = (LinearLayout) view
+					.findViewById(R.id.nameLayout);
 			namecard.setOnClickListener(new OnClickListener() {
 
 				@Override
 				public void onClick(View v) {
-					// TODO Auto-generated method stub
 
-					View namebar = view
+					View detailView = view
 							.findViewById(R.id.detail_namecard_bgcolor);
-					if (namebar == null) {
-						Log.i("if null","null");
+					if (detailView == null) {
 						LinearLayout mynewlayout = (LinearLayout) getActivity()
 								.findViewById(R.id.nameLayout);
 						LayoutInflater layoutInflater = (LayoutInflater) getActivity()
@@ -142,14 +127,14 @@ public class ProfileFragment extends Fragment {
 						LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
 								LayoutParams.MATCH_PARENT,
 								LayoutParams.WRAP_CONTENT);
-
 						mynewlayout.addView(layoutInflater.inflate(
 								R.layout.namecard_detail, mynewlayout, false),
 								params);
-
 						LinearLayout rl2 = (LinearLayout) getActivity()
 								.findViewById(R.id.detail_namecard_bgcolor);
-						rl2.setBackgroundColor(Color.parseColor(Constant.styles[Integer.parseInt(profile.getStyleUrl())]));
+						rl2.setBackgroundColor(Color
+								.parseColor(Constant.styles[Integer
+										.parseInt(profile.getStyleUrl())]));
 						TextView summaryTV = (TextView) getActivity()
 								.findViewById(R.id.summary);
 						summaryTV.setText(LoginHelper.userInfo.getSummary());
@@ -164,35 +149,13 @@ public class ProfileFragment extends Fragment {
 						}
 						EducationTV.setText(sb.toString());
 					} else {
-						Log.i("if null","not null");
-						((LinearLayout) namebar.getParent())
-								.removeView(namebar);
+						((LinearLayout) detailView.getParent())
+								.removeView(detailView);
 					}
 
 				}
 
 			});
-		} catch (Exception e) {
-			Log.i("layout", e.toString());
-			// handle it
-		}
-
-	}
-
-	public void insertVideo() {
-
-		LinearLayout videoLayout = (LinearLayout) getActivity()
-				.findViewById(R.id.videoLayout);
-		LayoutInflater videoInflater = (LayoutInflater) getActivity()
-				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		RelativeLayout.LayoutParams params2 = new RelativeLayout.LayoutParams(
-				LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
-
-		if (LoginHelper.userInfo.getVideoUrl() == null
-				|| LoginHelper.userInfo.getVideoUrl().equals("null")) {
-			videoLayout.addView(videoInflater.inflate(R.layout.record_button,
-					videoLayout, false), params2);
-
 			// add action listener
 			ImageButton recordBt = (ImageButton) getActivity().findViewById(
 					R.id.record);
@@ -200,8 +163,6 @@ public class ProfileFragment extends Fragment {
 
 				@Override
 				public void onClick(View v) {
-					// TODO Auto-generated method stub
-					Log.i("google", "video");
 
 					ContentValues values = new ContentValues();
 					values.put(MediaStore.Images.Media.TITLE,
@@ -220,22 +181,39 @@ public class ProfileFragment extends Fragment {
 
 			});
 
+		} catch (Exception e) {
+		}
+
+	}
+
+	public void insertVideo() {
+
+		LinearLayout videoLayout = (LinearLayout) getActivity().findViewById(
+				R.id.videoLayout);
+		LayoutInflater videoInflater = (LayoutInflater) getActivity()
+				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		LinearLayout.LayoutParams params2 = new LinearLayout.LayoutParams(
+				LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+
+		if (LoginHelper.userInfo.getVideoUrl() == null
+				|| LoginHelper.userInfo.getVideoUrl().equals("null")) {
+
 		} else {
+			videoLayout.removeView(getActivity().findViewById(
+					R.id.video_relativelayout));
 			videoLayout.addView(
 					videoInflater.inflate(R.layout.video, videoLayout, false),
 					params2);
-			Log.i("google", "add view");
 			VideoView videoView = (VideoView) getActivity().findViewById(
 					R.id.video);
 			videoView
 					.setVideoURI(Uri.parse(LoginHelper.userInfo.getVideoUrl()));
-			Log.i("google", LoginHelper.userInfo.getVideoUrl());
-			// videoView.setMediaController(new MediaController(this));
-			videoView.requestFocus();
-			MediaController mc =  new MyMediaController(getActivity(), (FrameLayout) getActivity().findViewById(R.id.controllerAnchor));
+//			videoView.requestFocus();
+			MediaController mc = new MyMediaController(getActivity(),
+					(FrameLayout) getActivity().findViewById(
+							R.id.controllerAnchor));
 			mc.setAnchorView(getActivity().findViewById(R.id.controllerAnchor));
 			videoView.setMediaController(mc);
-			// videoView.start();
 		}
 
 	}
@@ -245,9 +223,6 @@ public class ProfileFragment extends Fragment {
 		if (requestCode == 1) {
 
 			Uri videoUri = data.getData();
-			LinearLayout record_button_layout = (LinearLayout) getActivity()
-					.findViewById(R.id.record_button_layout);
-			record_button_layout.setVisibility(View.GONE);
 
 			String[] proj = { MediaStore.Images.Media.DATA };
 			Cursor cursor = getActivity().getContentResolver().query(videoUri,
@@ -255,14 +230,12 @@ public class ProfileFragment extends Fragment {
 			int column_index = cursor
 					.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
 			cursor.moveToFirst();
-
 			LoginHelper.userInfo.setVideoUrl(cursor.getString(column_index));
 
 			new UploadVideoHelper(getActivity()).execute(
 					LoginHelper.userInfo.getId(),
 					LoginHelper.userInfo.getVideoUrl());
 
-			insertVideo();
 		} else if (requestCode == 2 && resultCode == Activity.RESULT_OK) {
 			Log.i("requestcode", "requestCode");
 			Bundle b = data.getExtras();
@@ -272,32 +245,18 @@ public class ProfileFragment extends Fragment {
 
 		}
 	}
-	
+
 	private void changeStyleId(int styleId) {
 		Log.i("change3", "" + styleId);
 		LinearLayout rl = (LinearLayout) view
 				.findViewById(R.id.namecard_bgcolor);
-		// rl.setBackgroundColor(Constant.styles[styleId]);
 		rl.setBackgroundColor(Color.parseColor(Constant.styles[styleId]));
 
-		// views.refreshDrawableState();
-		// views.invalidate();
-
-		// Log.i("change2",""+styleId);
 		LinearLayout rl2 = (LinearLayout) getActivity().findViewById(
 				R.id.detail_namecard_bgcolor);
 		if (rl2 != null)
 			rl2.setBackgroundColor(Color.parseColor(Constant.styles[styleId]));
-
-		// Log.i("change3",""+styleId);
 		LoginHelper.userInfo.setStyleUrl("" + styleId);
-	}
-	
-	@Override
-	public void onPause(){
-		
-//		getActivity().getActionBar().hide();
-		super.onPause();
 	}
 
 }

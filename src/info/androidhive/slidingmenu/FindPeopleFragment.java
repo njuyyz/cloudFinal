@@ -32,6 +32,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.view.animation.RotateAnimation;
 import android.widget.ImageView;
 
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
@@ -50,6 +51,7 @@ public class FindPeopleFragment extends Fragment {
 	String uId;
 	HashMap<ImageView, NeigborItem> neiMap = new HashMap<ImageView, NeigborItem>();
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -148,8 +150,19 @@ public class FindPeopleFragment extends Fragment {
 					displayIcon(nei.picURL, iconList[i]);
 					if (nei.relation == 1 || nei.relation == 2) {
 						animate(progressBarList[i], null, 0.5f, 1000);
-					} else if (nei.relation == 3){
+					} else if (nei.relation == 3) {
 						animate(progressBarList[i], null, 1f, 1000);
+						// previous 2 or 1
+						NeigborItem item = neiMap.get(iconList[i]);
+						if (item != null
+								&& (item.relation == 2 || item.relation == 1)) {
+							RotateAnimation r = new RotateAnimation(0f, 360f,
+									Animation.RELATIVE_TO_SELF, 0.5f,
+									Animation.RELATIVE_TO_SELF, 0.5f);
+							r.setDuration((long) 2 * 1500);
+							r.setRepeatCount(0);
+							iconList[i].startAnimation(r);
+						}
 					}
 					iconList[i].setOnClickListener(new NeiClickListener());
 					neiMap.put(iconList[i], new NeigborItem(progressBarList[i],

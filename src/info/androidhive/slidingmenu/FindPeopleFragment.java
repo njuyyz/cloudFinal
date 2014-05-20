@@ -159,7 +159,7 @@ public class FindPeopleFragment extends Fragment {
 							RotateAnimation r = new RotateAnimation(0f, 360f,
 									Animation.RELATIVE_TO_SELF, 0.5f,
 									Animation.RELATIVE_TO_SELF, 0.5f);
-							r.setDuration((long) 2 * 1500);
+							r.setDuration((long) 1500);
 							r.setRepeatCount(0);
 							iconList[i].startAnimation(r);
 						}

@@ -7,11 +7,13 @@ import java.io.IOException;
 import java.net.URL;
 import java.net.URLConnection;
 
+import model.Constant;
 import model.UserInfo;
 import android.app.Fragment;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -23,7 +25,6 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.MediaController;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.VideoView;
 
@@ -42,24 +43,20 @@ public class DetailFragment extends Fragment {
 
 	public void onStart() {
 		super.onStart();
+		LinearLayout detailLayout = (LinearLayout) getActivity().findViewById(R.id.detailLayout);
+		detailLayout.setBackgroundColor(Color.parseColor(Constant.styles[Integer.parseInt(userInfo.getStyleUrl())]));
 		String name = userInfo.getFirstName() + " " + userInfo.getLastName()
 				+ " ";
-		
 		TextView nameTV = (TextView) getActivity().findViewById(
 				R.id.contact_basic_name);
 		nameTV.setText(name);
-		
 		TextView phoneTV = (TextView) getActivity().findViewById(
 				R.id.contact_phone);
-		
 		String phone = userInfo.getPhoneList()[0];
 		phoneTV.setText(phone);
-		
 		TextView emailTV = (TextView) getActivity().findViewById(
 				R.id.contact_email);
 		emailTV.setText(userInfo.getEducationList()[0]);
-		
-		
 		ImageView thumbNailIV = (ImageView) getActivity().findViewById(
 				R.id.contact_thumbnail);
 		try {
@@ -83,49 +80,29 @@ public class DetailFragment extends Fragment {
 			};
 			t.start();
 			t.join();
+			
+
+			thumbNailIV.setImageBitmap(userInfo.getThumbNail());
+
+			TextView summaryTV = (TextView) getActivity().findViewById(
+					R.id.contact_summary);
+			summaryTV.setText(userInfo.getSummary());
+
+			TextView EducationTV = (TextView) getActivity().findViewById(
+					R.id.contact_Educations);
+			String[] educationList = userInfo.getEducationList();
+			StringBuilder sb = new StringBuilder();
+			for (String s : educationList) {
+				sb.append(s + "\n");
+			}
+			EducationTV.setText(sb.toString());
+			
+			insertVideo();
 
 		} catch (Exception e) {
 			Log.i("google", e.toString());
 			// handle it
 		}
-
-		LinearLayout videoLayout = (LinearLayout) getActivity().findViewById(
-				R.id.videoLayout2);
-		LinearLayout detailLayout = (LinearLayout) getActivity().findViewById(R.id.detailLayout);
-		thumbNailIV.setImageBitmap(userInfo.getThumbNail());
-		
-	
-		TextView EducationTV = (TextView) getActivity().findViewById(
-				R.id.contact_Educations);
-		String[] educationList = userInfo.getEducationList();
-		StringBuilder sb = new StringBuilder();
-		for (String s : educationList) {
-			sb.append(s + "\n");
-		}
-		
-		
-		EducationTV.setText(sb.toString());
-		
-		
-		TextView summaryTVTitle = (TextView) getActivity().findViewById(
-				R.id.contact_summary_title);
-		TextView summaryTV = (TextView) getActivity().findViewById(
-				R.id.contact_summary);
-//		
-		LinearLayout summaryLL = (LinearLayout) getActivity().findViewById(
-				R.id.summary);
-		
-		if(userInfo.getSummary() == null || userInfo.getSummary().equals("null"))	{
-			
-			detailLayout.removeView(summaryLL);
-		}	else{
-			summaryTV.setText(userInfo.getSummary());
-		}
-		
-		// add other fields		
-		
-		insertVideo();
-
 	}
 
 	public void insertVideo() {
@@ -136,33 +113,31 @@ public class DetailFragment extends Fragment {
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		LinearLayout.LayoutParams params2 = new LinearLayout.LayoutParams(
 				LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-
+		
 		if (userInfo.getVideoUrl() == null
 				|| LoginHelper.userInfo.getVideoUrl().equals("null")) {
-			// VideoView vv = (VideoView)
-			// getActivity().findViewById(R.id.contact_video);
-			// vv.setVisibility(View.GONE);
-			Log.i("insertvideo", "null");
+//			VideoView vv = (VideoView) getActivity().findViewById(R.id.contact_video);
+//			vv.setVisibility(View.GONE);
 			return;
 
 		} else {
-			Log.i("insertvideo", userInfo.getVideoUrl());
 			// no....
 			videoLayout.addView(
 					videoInflater.inflate(R.layout.video, videoLayout, false),
 					params2);
-
+			
 			VideoView videoView = (VideoView) getActivity().findViewById(
 					R.id.video);
-			videoView.setVideoURI(Uri.parse(userInfo.getVideoUrl()));
+			videoView
+					.setVideoURI(Uri.parse(userInfo.getVideoUrl()));
 			Log.i("google", userInfo.getVideoUrl());
-			videoView.requestFocus();
+//			videoView.requestFocus();
 			videoView.setMediaController(new MediaController(getActivity()));
 			MediaController mc = new MyMediaController(getActivity(),
 					(FrameLayout) getActivity().findViewById(
 							R.id.controllerAnchor));
 			mc.setAnchorView(getActivity().findViewById(R.id.controllerAnchor));
-			videoView.setMediaController(mc);
+			videoView.setMediaController(mc);	
 		}
 
 	}

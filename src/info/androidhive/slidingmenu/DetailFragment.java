@@ -91,26 +91,10 @@ public class DetailFragment extends Fragment {
 
 		LinearLayout videoLayout = (LinearLayout) getActivity().findViewById(
 				R.id.videoLayout2);
-		RelativeLayout detailLayout = (RelativeLayout) getActivity().findViewById(R.id.detailLayout);
+		LinearLayout detailLayout = (LinearLayout) getActivity().findViewById(R.id.detailLayout);
 		thumbNailIV.setImageBitmap(userInfo.getThumbNail());
 		
-		TextView summaryTVTitle = (TextView) getActivity().findViewById(
-				R.id.contact_summary_title);
-		TextView summaryTV = (TextView) getActivity().findViewById(
-				R.id.contact_summary);
-		
-		if(userInfo.getSummary() == null || userInfo.getSummary().equals("null"))	{
-			
-			detailLayout.removeView(summaryTVTitle);
-			detailLayout.removeView(summaryTV);
-			// detailLayout.remove()
-		}	else{
-			summaryTV.setText(userInfo.getSummary());
-		}
-		
-
-		
-		
+	
 		TextView EducationTV = (TextView) getActivity().findViewById(
 				R.id.contact_Educations);
 		String[] educationList = userInfo.getEducationList();
@@ -118,11 +102,27 @@ public class DetailFragment extends Fragment {
 		for (String s : educationList) {
 			sb.append(s + "\n");
 		}
+		
+		
 		EducationTV.setText(sb.toString());
 		
-		// add other fields
-//		TextView whatTextView = getActivity().findViewById(R.id.);
 		
+		TextView summaryTVTitle = (TextView) getActivity().findViewById(
+				R.id.contact_summary_title);
+		TextView summaryTV = (TextView) getActivity().findViewById(
+				R.id.contact_summary);
+//		
+		LinearLayout summaryLL = (LinearLayout) getActivity().findViewById(
+				R.id.summary);
+		
+		if(userInfo.getSummary() == null || userInfo.getSummary().equals("null"))	{
+			
+			detailLayout.removeView(summaryLL);
+		}	else{
+			summaryTV.setText(userInfo.getSummary());
+		}
+		
+		// add other fields		
 		
 		insertVideo();
 

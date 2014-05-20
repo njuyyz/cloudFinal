@@ -86,11 +86,10 @@
             android:layout_toRightOf="@+id/contact_summary_title"
             android:text="TextView" />
 
-        <RelativeLayout
+<!--         <RelativeLayout
             android:id="@+id/linearLayout1"
             android:layout_width="3100dp"
             android:layout_height="300dp"
-            
             android:layout_below="@+id/contact_Educations"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="40dp"
@@ -104,7 +103,38 @@
                 android:layout_alignParentRight="true"
                 android:layout_alignParentTop="true" >
             </VideoView>
-        </RelativeLayout>
+        </RelativeLayout> -->
+
+        <LinearLayout
+            android:layout_below="@+id/contact_Educations"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="40dp"
+            android:layout_marginTop="40dp"
+            
+			android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/picture_frame"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_horizontal"
+                android:background="#000000"
+                android:orientation="vertical" >
+
+                <LinearLayout
+                    android:id="@+id/videoLayout2"
+                    android:layout_width="match_parent"
+                    android:layout_height="400dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginTop="20dp"
+                    android:orientation="vertical" >
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
     </RelativeLayout>
 
 </ScrollView>

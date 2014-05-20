@@ -2,18 +2,20 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:gravity="center_horizontal"
     android:background="@android:color/white"
+    android:gravity="center_horizontal"
     android:orientation="vertical" >
 
-    <Button
+    <ImageButton
         android:id="@+id/login_bt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="200dp"
+        android:layout_height="60dp"
         android:layout_below="@+id/imageView1"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="50dp"
-        android:text="Log In With LinkedIn" />
+        android:background="@null"
+        android:scaleType="fitCenter"
+        android:src="@drawable/login_button_bg" />
 
     <ImageView
         android:id="@+id/imageView1"

@@ -17,11 +17,11 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Button;
+import android.widget.ImageButton;
 
 public class LoginActivity extends Activity {
 
-	Button btLogin;
+	ImageButton btLogin;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -41,7 +41,7 @@ public class LoginActivity extends Activity {
 	}
 
 	private void initView() {
-		btLogin = (Button) findViewById(R.id.login_bt);
+		btLogin = (ImageButton) findViewById(R.id.login_bt);
 		btLogin.setOnClickListener(new OnClickListener() {
 
 			@Override

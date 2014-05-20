@@ -19,6 +19,7 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -65,6 +66,8 @@ public class ProfileFragment extends Fragment {
 		super.onStart();
 
 		profile = LoginHelper.userInfo;
+		final Typeface face = Typeface.createFromAsset(getActivity()
+				.getAssets(), "fonts/kozuka_light.otf");
 
 		// initial information
 		String name = profile.getFirstName() + " " + profile.getLastName()
@@ -72,11 +75,14 @@ public class ProfileFragment extends Fragment {
 		TextView nameTV = (TextView) getActivity()
 				.findViewById(R.id.basic_name);
 		nameTV.setText(name);
+		nameTV.setTypeface(face);
 		TextView phoneTV = (TextView) getActivity().findViewById(R.id.phone);
 		String phone = profile.getPhoneList()[0];
 		phoneTV.setText(phone);
+		phoneTV.setTypeface(face);
 		TextView emailTV = (TextView) getActivity().findViewById(R.id.email);
 		emailTV.setText(profile.getEducationList()[0]);
+		emailTV.setTypeface(face);
 
 		// init image
 		ImageView thumbNailIV = (ImageView) getActivity().findViewById(
@@ -144,6 +150,7 @@ public class ProfileFragment extends Fragment {
 					TextView summaryTV = (TextView) getActivity().findViewById(
 							R.id.summary);
 					summaryTV.setText(LoginHelper.userInfo.getSummary());
+					summaryTV.setTypeface(face);
 
 					TextView EducationTV = (TextView) getActivity()
 							.findViewById(R.id.Educations);
@@ -154,6 +161,7 @@ public class ProfileFragment extends Fragment {
 						sb.append(s + "\n");
 					}
 					EducationTV.setText(sb.toString());
+					EducationTV.setTypeface(face);
 				} else {
 					((LinearLayout) detailView.getParent())
 							.removeView(detailView);

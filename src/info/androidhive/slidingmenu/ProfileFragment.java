@@ -156,6 +156,7 @@ public class ProfileFragment extends Fragment {
 				}
 
 			});
+			
 			// add action listener
 			ImageButton recordBt = (ImageButton) getActivity().findViewById(
 					R.id.record);

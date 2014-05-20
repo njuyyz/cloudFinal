@@ -21,8 +21,6 @@
         android:adjustViewBounds="true"
         android:scaleType="fitXY" />
 
-    
-
     <ImageView
         android:id="@+id/contact2"
         android:layout_width="100dp"
@@ -53,31 +51,36 @@
     
     <de.passsy.holocircularprogressbar.HoloCircularProgressBar
         android:id="@+id/holoCircularProgressBar1"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="70dp"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_alignLeft="@id/contact1"
+        android:layout_alignTop="@id/contact1"
+        android:layout_marginTop="-25dp"
+        android:layout_marginLeft="-25dp"
         android:visibility="gone"
         app:progress_background_color="@android:color/darker_gray"
         app:progress_color="#ffff4444" />
 
     <de.passsy.holocircularprogressbar.HoloCircularProgressBar
         android:id="@+id/holoCircularProgressBar2"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:layout_alignParentLeft="true"
-        android:layout_marginTop="160dp"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_alignLeft="@id/contact2"
+        android:layout_alignTop="@id/contact2"
+        android:layout_marginTop="-25dp"
+        android:layout_marginLeft="-25dp"
         android:visibility="gone"
         app:progress_background_color="@android:color/darker_gray"
         app:progress_color="#ffff4444" />
     
     <de.passsy.holocircularprogressbar.HoloCircularProgressBar
         android:id="@+id/holoCircularProgressBar3"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:layout_alignParentRight="true"
-        android:layout_marginTop="160dp"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_alignLeft="@id/contact3"
+        android:layout_alignTop="@id/contact3"
+        android:layout_marginTop="-25dp"
+        android:layout_marginLeft="-25dp"
         android:visibility="gone"
         app:progress_background_color="@android:color/darker_gray"
         app:progress_color="#ffff4444" />

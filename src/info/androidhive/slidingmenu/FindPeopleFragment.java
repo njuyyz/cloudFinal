@@ -4,9 +4,11 @@ import helper.JSONHelper;
 import helper.LoginHelper;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import model.Constant;
+import model.NeigborItem;
 import model.Neighbor;
 import model.UserInfo;
 import util.GetRequest;
@@ -46,6 +48,7 @@ public class FindPeopleFragment extends Fragment {
 	DisplayImageOptions options;
 	private ObjectAnimator mProgressBarAnimator;
 	String uId;
+	HashMap<ImageView, NeigborItem> neiMap = new HashMap<ImageView, NeigborItem>();
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -71,19 +74,6 @@ public class FindPeopleFragment extends Fragment {
 		uId = user.getId();
 		displayIcon(user.getPicUrl(), iconSelf);
 
-		final HoloCircularProgressBar mHoloCircularProgressBar = (HoloCircularProgressBar) rootView
-				.findViewById(R.id.holoCircularProgressBar1);
-		mHoloCircularProgressBar.setProgress(0f);
-		iconSelf.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				if (mProgressBarAnimator != null) {
-					mProgressBarAnimator.cancel();
-				}
-				animate(mHoloCircularProgressBar, null, 0.5f, 1000);
-				mHoloCircularProgressBar.setMarkerProgress(1f);
-			}
-		});
 		// get icon every 3 seconds
 		Thread fetchThread = new Thread(new Runnable() {
 			@Override
@@ -156,6 +146,14 @@ public class FindPeopleFragment extends Fragment {
 					iconList[i].setVisibility(View.VISIBLE);
 					progressBarList[i].setVisibility(View.VISIBLE);
 					displayIcon(nei.picURL, iconList[i]);
+					if (nei.relation == 1 || nei.relation == 2) {
+						animate(progressBarList[i], null, 0.5f, 1000);
+					} else if (nei.relation == 3){
+						animate(progressBarList[i], null, 1f, 1000);
+					}
+					iconList[i].setOnClickListener(new NeiClickListener());
+					neiMap.put(iconList[i], new NeigborItem(progressBarList[i],
+							nei.relation, nei.uId));
 				}
 			}
 			for (int i = neiList.size(); i < 3; i++) {
@@ -236,4 +234,39 @@ public class FindPeopleFragment extends Fragment {
 		mProgressBarAnimator.start();
 	}
 
+	private class AddContactTask extends AsyncTask<Void, Void, Void> {
+		private String from;
+		private String to;
+
+		public AddContactTask(String from, String to) {
+			this.from = from;
+			this.to = to;
+		}
+
+		@Override
+		protected Void doInBackground(Void... params) {
+			GetRequest request = new GetRequest(String.format(
+					Constant.ADD_REQUEST, from, to), getActivity());
+			request.getContent();
+			return null;
+		}
+	}
+
+	private class NeiClickListener implements OnClickListener {
+		@Override
+		public void onClick(View v) {
+			ImageView imageView = (ImageView) v;
+			NeigborItem item = neiMap.get(imageView);
+			Log.e(">>> prev status", "" + item.relation);
+			if (item.relation == 0) {
+				animate(item.progressBar, null, 0.5f, 1000);
+				// send request
+				new AddContactTask(uId, item.uId).execute();
+			} else if (item.relation == 2) {
+				animate(item.progressBar, null, 1.0f, 1000);
+				// send request to complete
+				new AddContactTask(uId, item.uId).execute();
+			}
+		}
+	}
 }
